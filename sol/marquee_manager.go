@@ -1,8 +1,8 @@
 package sol
 import (
 	"sync"
-	"proto_msg"
-	"github.com/protobuf/proto"
+	"github.com/KylinHe/zcode-lib/proto_msg"
+	"github.com/KylinHe/zcode-lib/github.com/protobuf/proto"
 	"time"
 	"github.com/KylinHe/zcode-lib/def"
 )
@@ -73,7 +73,7 @@ func (mgr *MarqueeManager)Update() *protocol.GS2C {
 
 	var gpDel []int32 //准备删除的id 列表
 	curTime := time.Now().Unix()
-	
+
 	// 游戏内消息推送
 	for _,gPush := range mgr.GamePush {
 		if len(gpDel) >= 5 {	// 最多给5条
@@ -119,7 +119,7 @@ func (mgr *MarqueeManager)Update() *protocol.GS2C {
 func (mgr *MarqueeManager) InsertGamePush(m *GamePush) {
 	mgr.Lock()
 	defer mgr.Unlock()
-	
+
 	if len(mgr.GamePush) >= Msg_Max {	// 超上限了，就不发了
 		return
 	}
