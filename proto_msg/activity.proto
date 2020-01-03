@@ -156,10 +156,17 @@ message Resp_Continue_Charge_ {
     repeated Activity_Reward_Info_ ChargeReward = 2;    // 连续充值达成奖励
 }
 
+// 响应 新手7日充值活动（静态数据）
+message Resp_New_Continue_Charge_ {
+    repeated Activity_Reward_Info_ NewContinueCharge = 1;  // 新手连续充值
+    repeated Activity_Reward_Info_ NewChargeReward = 2;    // 新手连续充值达成奖励
+}
+
 // 请求 连续充值活动奖励领取
 message Req_Continue_Charge_Rec_ {
     optional int32 Type = 1;    // 1：连续充值奖励 2：连续充值次数奖励
     optional int32 ID = 2;      // 第几天的充值奖励 | 充值次数奖励
+    optional bool IsNewCharge = 3;  // 是否是新手7日签到
 }
 
 // 响应 连续充值活动奖励领取

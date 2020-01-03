@@ -325,6 +325,7 @@ message GS2C{//响应类型消息
     optional Resp_Update_Player_Privileges_ Resp_Update_Player_Privileges = 15109;  // 更新玩家特权
     optional Resp_Continue_Charge_ Resp_Continue_Charge = 15110;    // 响应 连续充值
     optional Resp_Continue_Charge_Rec_ Resp_Continue_Charge_Rec = 15111; // 响应 连续充值领取
+    optional Resp_New_Continue_Charge_ Resp_New_Continue_Charge_ = 15112;   // 响应 新手7日充值
 //战斗相关
     optional Resp_ChapterInfo_ Resp_ChapterInfo = 16000; //响应关卡数据请求
     optional Resp_ChapterNode_PickUp_ Resp_ChapterNode_PickUp = 16005;//响应关卡拾取
