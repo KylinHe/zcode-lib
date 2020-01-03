@@ -432,13 +432,14 @@ const (
 	ActGrowthCapital                // 9 成长基金
 	Act4                            // 10节日兑换
 	ActNewSign                      // 11新手签到
-	ActConsum						// 12累计消费
-	ActLimitGift					// 13限时礼包
-	ActNewFirstCharge1 				// 14新首充1
-	ActNewFirstCharge2 				// 15新首充2
-	ActNewFirstCharge3 				// 16新首充3
-	ActPrizeWheel					// 17大转盘
-	ActContinueCharge				// 18 连续充值活动
+	ActConsum			// 12 累计消费
+	ActLimitGift			// 13 限时礼包
+	ActNewFirstCharge1 		// 14 新首充1
+	ActNewFirstCharge2 		// 15 新首充2
+	ActNewFirstCharge3 		// 16 新首充3
+	ActPrizeWheel			// 17 大转盘
+	ActContinueCharge		// 18 连续充值活动
+	ActNewChargeSeven		// 19 新手七日充值签到
 )
 
 // 特权
