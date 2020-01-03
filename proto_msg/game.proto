@@ -173,6 +173,7 @@ message Resp_PlayerUpdate_Base_{
 message Resp_PlayerUpdate_Hero_{
     repeated Hero_Info_ Heroes = 1;//英雄信息数据
 	optional int32 PubHeroPro = 2;	// 公用英雄熟练度
+	optional int32 PubHeroClip = 3;	// 公用英雄碎片
 }
 
 //回复 玩家 道具更新
@@ -427,6 +428,7 @@ message Resp_PlayerData_Hero_{
     repeated Reel_Info_ Reels = 5;//卷轴信息
 	optional int32 OldExp = 6;	// 未加的家族经验
 	optional int32 PubHeroPro = 7;	// 公用英雄熟练度
+	optional int32 PubHeroClip = 8;	// 公用英雄碎片
 }
 
 //回复 用户战斗数据信息

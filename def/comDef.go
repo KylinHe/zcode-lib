@@ -44,6 +44,7 @@ const (
 	RewardDrawCard				   // 抽卡 19
 	RewardTaskScore				   // 任务积分 20
 	RewardPublicHeroPro			   // 公用英雄熟练度 21
+	RewardPublicHeroClip		   // 公用英雄碎片 22
 )
 
 // 货币类型
@@ -240,9 +241,9 @@ const (
 const (
 	CardOpGetRefine int32 = iota + 101
 	//CardOpGetRefine = "gRefine"	// 熔炼获取
-	CardOpUseRefine 
+	CardOpUseRefine
 	//CardOpUseRefine = "uRefine"	// 熔炼消耗
-	CardOpUseUpgrade 
+	CardOpUseUpgrade
 	//CardOpUseUpgrade = "uUp"	// 卡牌升级消耗
 	CardOpUseCreate  // 创建消耗
 )
@@ -257,7 +258,7 @@ const (
 //
 const (
 	FLASE int32 = iota
-	TRUE  
+	TRUE
 )
 
 // 每日获得荣耀点上限
@@ -380,8 +381,8 @@ const (
 // 平台
 const (
 	PlatformH5     int32 = iota //h5 游客  浏览器
-	PlatformGoogle 
-	PlatformIos    
+	PlatformGoogle
+	PlatformIos
 	PlatformFb      // facebook
 	PlatformHiho	// hiho
 	PlatformWX		// 5 wechat
@@ -439,6 +440,7 @@ const (
 	ActNewFirstCharge3 				// 16新首充3
 	ActPrizeWheel					// 17大转盘
 	ActContinueCharge				// 18 连续充值活动
+	ActNetContinueCharge			// 19 新手连续充值活动
 )
 
 // 特权
