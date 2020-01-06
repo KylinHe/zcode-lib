@@ -95,6 +95,9 @@ message Resp_PlayerData_Activity_ {
     repeated int32 ContinueChargeNum = 30;  // 充值次数
     repeated int32 ContinueChargeReward = 31;   // 充值奖励领取
     optional int32 SumPay = 32;  // 累计充值（金额）
+    repeated int32 NewContinueChargeState = 33;    // 新手7日充值状态
+    repeated int32 NewContinueChargeNum = 34;  // 新手7日充值次数
+    repeated int32 NewContinueChargeReward = 35;   // 新手7日充值奖励领取
 }
 
 // 更新 玩家活动数据
@@ -129,6 +132,9 @@ message Resp_PlayerUpdate_Activity_ {
     repeated int32 ContinueChargeNum = 30;  // 充值次数
     repeated int32 ContinueChargeReward = 31;   // 充值奖励领取
     optional int32 SumPay = 32;  // 累计充值（金额）
+    repeated int32 NewContinueChargeState = 33;    // 新手7日充值状态
+    repeated int32 NewContinueChargeNum = 34;  // 新手7日充值次数
+    repeated int32 NewContinueChargeReward = 35;   // 新手7日充值奖励领取
 }
 
 // 请求 礼包领取
