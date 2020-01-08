@@ -323,6 +323,10 @@ It has these top-level messages:
 	Resp_ScoreShop_Update_
 	Req_ScoreShop_Buy_
 	Resp_ScoreShop_Buy_
+	Req_EquipScoreShop_Update_
+	Resp_EquipScoreShop_Update_
+	Req_EquipScoreShop_Buy_
+	Resp_EquipScoreShop_Buy_
 	Req_PayShop_Show_
 	Req_Exchange_Item_
 	Resp_Exchange_Item_

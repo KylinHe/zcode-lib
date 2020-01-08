@@ -45,6 +45,7 @@ const (
 	RewardTaskScore				   // 任务积分 20
 	RewardPublicHeroPro			   // 公用英雄熟练度 21
 	RewardPublicHeroClip		   // 公用英雄碎片 22
+	RewardDrawEquip				   // 抽装备 23
 )
 
 // 货币类型

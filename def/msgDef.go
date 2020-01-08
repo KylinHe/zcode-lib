@@ -67,6 +67,8 @@ const (
 	ReqBuyAltar int32 = 2508	// 请求 购买祭坛
 	ReqScoreShopUp int32 = 2509	// 请求 积分商店更新
 	ReqScoreShopBuy int32 = 2510// 请求 积分商店购买
+	ReqEquipScoreShopUp int32 = 2512	// 请求 装备积分商店更新
+	ReqEquipScoreShopBuy int32 = 2513// 请求 装备积分商店购买
 
 	ReqChatInfo int32 = 2551;//请求聊天历史数据
 	ReqChatSend int32 = 2552;//请求聊天数据发送
@@ -266,6 +268,8 @@ const (
 	RespScoreShopUp int32 = 12509	// 响应 积分商店更新
 	RespScoreShopBuy int32 = 12510// 响应 积分商店购买
 	RespUpdatePlayerDrawInfo int32 = 12511// 更新 玩家抽卡数据
+	RespEquipScoreShopUp int32 = 12512	// 响应 装备积分商店更新
+	RespEquipScoreShopBuy int32 = 12513// 响应 装备积分商店购买
 
 	//聊天相关
 	RespMarquee		int32 = 12550//响应系统通知

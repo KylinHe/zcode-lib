@@ -899,6 +899,10 @@ message Resp_Update_Player_DrawInfo_ {
 	optional int32 DrawHighFree = 2;	// 高级抽免费次数
 	optional int64 DrawNormalFreeNext = 3;	// 普通抽下次免费时间
 	optional int32 DrawNormalFreeDailyNum = 4;	// 普通抽每日剩余次数
+	optional int32 DrawEquipNormalFree = 5;	// 装备普通抽免费次数
+	optional int32 DrawEquipHighFree = 6;	// 装备高级抽免费次数
+	optional int64 DrawEquipNormalFreeNext = 7;	// 装备普通抽下次免费时间
+	optional int32 DrawEquipNormalFreeDailyNum = 8;	// 装备普通抽每日剩余次数
 }
 
 message Req_Shop_Buy_{//请求购买商品
@@ -939,6 +943,33 @@ message Req_ScoreShop_Buy_ {
 message Resp_ScoreShop_Buy_ {
 	repeated Reward_Info_ Goods = 1;
 	optional int32 ShopScore = 2;
+	repeated int32 State = 3;	// 状态 全量更新
+}
+
+// 请求 刷新积分商店
+message Req_EquipScoreShop_Update_ {
+	optional int32 Type = 1;	// 0:免费刷 1:钻石刷
+}
+
+// 响应 刷新积分商店
+message Resp_EquipScoreShop_Update_ {
+	optional int32 EquipScore = 1;
+	optional int64 NextRefreshTime = 2;
+	repeated int32 Price = 3;	// 价格
+	repeated Reward_Info_ Goods = 4;	// 商品
+	repeated int32 State = 5;	// 购买状态 0：未买 1：已买
+	optional int32 ScoreShopUpPrice = 6;	// 积分商店刷新消耗钻石
+}
+
+// 请求 积分商店购买
+message Req_EquipScoreShop_Buy_ {
+	optional int32 Idx = 1;	//商品索引
+}
+
+// 响应 积分商店购买
+message Resp_EquipScoreShop_Buy_ {
+	repeated Reward_Info_ Goods = 1;
+	optional int32 EquipScore = 2;
 	repeated int32 State = 3;	// 状态 全量更新
 }
 

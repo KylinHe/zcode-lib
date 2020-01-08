@@ -81,6 +81,9 @@ message C2GS{//请求类型消息
     optional Req_Buy_Altar_ Req_Buy_Altar = 2508;// 请求 购买祭坛
     optional Req_ScoreShop_Update_ Req_ScoreShop_Update = 2509;// 请求 积分商店刷新
     optional Req_ScoreShop_Buy_ Req_ScoreShop_Buy = 2510;// 请求 积分商店购买
+
+    optional Req_EquipScoreShop_Update_ Req_EquipScoreShop_Update = 2512;// 请求 装备积分商店刷新
+    optional Req_EquipScoreShop_Buy_ Req_EquipScoreShop_Buy = 2513;// 请求 装备积分商店购买
 //聊天相关
     optional Req_Chat_Info_ Req_Chat_Info = 2551;//请求聊天历史数据
     optional Req_Chat_Send_ Req_Chat_Send = 2552;//请求聊天数据发送
@@ -300,6 +303,9 @@ message GS2C{//响应类型消息
     optional Resp_ScoreShop_Update_ Resp_ScoreShop_Update = 12509;  // 响应 积分商店更新
     optional Resp_ScoreShop_Buy_ Resp_ScoreShop_Buy = 12510;    // 响应 积分商店购买
     optional Resp_Update_Player_DrawInfo_ Resp_Update_Player_DrawInfo = 12511;// 响应 更新玩家抽卡数据
+
+    optional Resp_EquipScoreShop_Update_ Resp_EquipScoreShop_Update = 12512;  // 响应 装备积分商店更新
+    optional Resp_EquipScoreShop_Buy_ Resp_EquipScoreShop_Buy = 12513;    // 响应 装备积分商店购买
 //聊天相关
     optional Resp_Marquee_  Resp_Marquee = 12550;//响应系统通知
     optional Resp_Chat_Info_ Resp_Chat_Info = 12551;//响应聊天历史数据
