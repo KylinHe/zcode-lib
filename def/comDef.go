@@ -352,6 +352,7 @@ const (
 	None     int32 = iota // 未完成
 	Recv                  // 可领取
 	Received              // 已领取
+	Invalid				  // 失效
 )
 
 // 世界boss
@@ -442,6 +443,7 @@ const (
 	ActPrizeWheel                   // 17大转盘
 	ActContinueCharge               // 18 连续充值活动
 	ActNewContinueCharge            // 19 新手连续充值活动
+	ActFixedDateSign				// 20 固定日期签到
 )
 
 // 特权

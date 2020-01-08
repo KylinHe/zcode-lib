@@ -98,6 +98,7 @@ message Resp_PlayerData_Activity_ {
     repeated int32 NewContinueChargeState = 33;    // 新手7日充值状态
     repeated int32 NewContinueChargeNum = 34;  // 新手7日充值次数
     repeated int32 NewContinueChargeReward = 35;   // 新手7日充值奖励领取
+    repeated int32 FixedDateSignState = 36; // 固定日期签到
 }
 
 // 更新 玩家活动数据
@@ -135,6 +136,7 @@ message Resp_PlayerUpdate_Activity_ {
     repeated int32 NewContinueChargeState = 33;    // 新手7日充值状态
     repeated int32 NewContinueChargeNum = 34;  // 新手7日充值次数
     repeated int32 NewContinueChargeReward = 35;   // 新手7日充值奖励领取
+    repeated int32 FixedDateSignState = 36; // 固定日期签到
 }
 
 // 请求 礼包领取
