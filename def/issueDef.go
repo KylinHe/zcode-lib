@@ -139,5 +139,6 @@ const (
 	ERR_BUY_PRE			 // 要先购买前置 231
 	ERR_NO_BUY			 // 未购买 232
 	ERR_EQUIP_BAG_MAX	 // 背包满了，发邮件了 233
-	ERR_DRAW_TIMES_NOTENOUGH // 抽卡次数不足
+	ERR_DRAW_TIMES_NOTENOUGH // 抽卡次数不足 234
+	ERR_EXCHANGE_TIMES_NOTENOUGH // 兑换道具次数不足 235
 )

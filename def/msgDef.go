@@ -294,6 +294,7 @@ const (
 	RespDataActivityUpdate int32 = 15108	// 响应 
 	RespUpdatePlayerPrivileges int32 = 15109	// 更新玩家特权
 	RespContinueChargeRec int32 = 15111;	// 连续充值奖励领取
+	RespExchangeItemData int32 = 15113 // 活动兑换道具
 
 	RespChapterInfo       int32 = 16000 //回复关卡静态数据
 	RespChapterNodePickUp int32 = 16005 //回复章节关卡拾取

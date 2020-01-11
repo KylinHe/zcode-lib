@@ -444,6 +444,7 @@ const (
 	ActContinueCharge               // 18 连续充值活动
 	ActNewContinueCharge            // 19 新手连续充值活动
 	ActFixedDateSign				// 20 固定日期签到
+	ActItemExchange					// 21 道具兑换
 )
 
 // 特权
@@ -451,6 +452,7 @@ const (
 	PrivilegesBuyVit	int32 = iota + 1	// 1 额外购买体力
 	PrivilegesStep	// 2 关卡步数增加
 	PrivilegesDraw	// 3 每日免费高级抽
+	PrivilegesDrawEquip // 4 每日免费高级抽装备
 )
 
 // 抽卡类型
