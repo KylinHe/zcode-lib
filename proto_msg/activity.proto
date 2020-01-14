@@ -270,13 +270,17 @@ message Req_Receive_RedPacket_ {
 }
 message Resp_Receive_RedPacket_ {
     optional int32 Result = 1;  // 结果 0：success 1：没抢到 2：没次数了
-    repeated RedPacketReceiver_ receivers = 2;  // 红包领取人
+    repeated RedPacketReceiver_ Receivers = 2;  // 红包领取人
     optional int32 Amount = 3;  // 我获得的金额
     optional int32 ReceNum = 4; // 今日领取次数
+    optional string SourceName = 5;// 来源
+    optional int32 SourceIcon = 6;
+    optional int32 Total = 7;   // 总次数
+    optional int32 ReceLimit = 8; // 今日领取上限
 }
 message RedPacketReceiver_ {
     optional int32 Icon = 1;
-    optional int64 Uid = 2;
+    optional string Name = 2;
     optional int32 Amount = 3;
 }
 
