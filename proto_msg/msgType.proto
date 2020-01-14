@@ -102,6 +102,9 @@ message C2GS{//请求类型消息
     optional Req_Rec_Draw_ Req_Rec_Draw = 5105;// 请求 领取抽卡积分
     optional Req_PrizeWheel_ Req_PrizeWheel = 5107; // 请求 大转盘
     optional Req_Continue_Charge_Rec_ Req_Continue_Charge_Rec = 5111; // 请求 连续充值领取
+
+    optional Req_Receive_RedPacket_ Req_Receive_RedPacket = 5114;
+    optional Req_Get_RedPacket_ Req_Get_RedPacket = 5115;
 //战斗相关
     optional Req_ChapterInfo_ Req_ChapterInfo = 6000; //客户端请求关卡数据
     optional Req_ChapterNode_PickUp_ Req_ChapterNode_PickUp = 6005;//客户请求拾取关卡奖励
@@ -333,6 +336,8 @@ message GS2C{//响应类型消息
     optional Resp_Continue_Charge_Rec_ Resp_Continue_Charge_Rec = 15111; // 响应 连续充值领取
     optional Resp_New_Continue_Charge_ Resp_New_Continue_Charge_ = 15112;   // 响应 新手7日充值
     optional Resp_Exchange_Item_Data_ Resp_Exchange_Item_Data = 15113;  // 活动兑换道具
+    optional Resp_Receive_RedPacket_ Resp_Receive_RedPacket = 15114;
+    optional Resp_Get_RedPacket_ Resp_Get_RedPacket = 15115;
 //战斗相关
     optional Resp_ChapterInfo_ Resp_ChapterInfo = 16000; //响应关卡数据请求
     optional Resp_ChapterNode_PickUp_ Resp_ChapterNode_PickUp = 16005;//响应关卡拾取
