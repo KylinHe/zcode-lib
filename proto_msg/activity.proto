@@ -263,6 +263,7 @@ message Resp_Update_Player_Privileges_ {
     optional int32 VitBuyTimes = 2; // 体力购买次数
     optional int32 DrawHighFree = 3;    // 高级抽免费次数
     optional int32 VitBuyTimesLimit = 4;	// 体力购买次数
+    optional int32 DrawEquipHighFree = 5;    // 高级装备抽免费次数
 }
 
 // 领取红包
@@ -288,5 +289,5 @@ message RedPacketReceiver_ {
 message Req_Get_RedPacket_ {}
 
 message Resp_Get_RedPacket_ {
-    optional int32 Result = 1;  // 结果 0：有 1：没 2：没次数 3：非活动时间
+    optional int32 Result = 1;  // 结果 0：有 1：没 2：没次数 3：非活动时间 4：等级未达到
 }
