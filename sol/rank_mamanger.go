@@ -92,7 +92,7 @@ func (mgr *RankManager)GetRank( rankKey string, page int32, pageNum int32 )[]Ran
 	var infos []RankInfo
 	ranks := mgr.redisClient.ZRevRangeWithScore(rankKey,begin,(end-1) )
 	for _, r := range ranks {
-		begin += 1//默认从 0 开始
+
 		if rankKey == REDIS_RANK_LEVEL{
 			if begin >= MAX_RANK_LEVEL {	// 不在排行内
 				break
@@ -100,6 +100,14 @@ func (mgr *RankManager)GetRank( rankKey string, page int32, pageNum int32 )[]Ran
 		}
 		info := RankInfo{}
 		info.Uid, _ = strconv.ParseInt( r.Member, 10, 64 )
+
+		userDB := GetInsUserMgr().GetUserByUid( info.Uid )//获取缓存数据
+		if userDB == nil {
+			continue
+		}
+
+		begin += 1//默认从 0 开始
+
 		info.Value = r.Score
 		info.Rank = begin
 
