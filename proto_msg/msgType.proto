@@ -18,6 +18,7 @@ message C2GS{//请求类型消息
 //系统内
     optional Req_Sys_Friend_Apply_ Req_Sys_Friend_Apply = 150;//服务器内推送... 好友添加
     optional int32 Req_Conn_Center = 151;   // 连接center server请求
+	optional int32 Req_Conn_Battle = 152;//连接 battle server 请求
 
 //基础
 	optional Req_Gift_	Req_Gift = 232; //请求领取礼包
