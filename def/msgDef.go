@@ -5,7 +5,8 @@ const (
 	// sys
 	ReqSysFriendApply int32 = 150
 	ReqConnCenter int32 = 151	// 连接center server
-
+	ReqConnBattle int32 = 152   // 连接battle server
+	
 	ReqCreateUser int32 = 51
 	ReqMailUpdate int32 = 52
 	ReqKillOff int32 = 54	// 踢人
