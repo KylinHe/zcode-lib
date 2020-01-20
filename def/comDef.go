@@ -229,6 +229,7 @@ const ( //日志操作
 	LogOpActPrize		   // 活动 大转盘 36
 	LogOpChat 			   // 聊天 37
 	LogOpNewFirstCharge	   // 新首充奖励 38
+	LogOpRedPack		   // 红包 39
 )
 
 // 装备日志类型
