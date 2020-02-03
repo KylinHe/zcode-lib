@@ -9,6 +9,9 @@ import (
 	"strings"
 )
 const(
+	REDIS_RANK_SEASON_ID = "rRankSeasonID_"//赛季ID
+	REDIS_RANK_SEASON_TIME = "rRankSeasonTime_"//赛季结束时间
+
 	REDIS_RANK_LEVEL = "rRankLv_" //等级排行
 	REDIS_RANK_LV_TEMP = "trRankLv_"	// 等级排行临时存储
 	REDIS_RANK_GROWTHVALUE = "rRankGrowth"	// 成长值排行
@@ -75,6 +78,29 @@ func (mgr *RankManager)FlushDB(){
 		return
 	}
 	mgr.redisClient.FlushDB()
+}
+
+// 设置 赛季ID  赛季结束时间  wjl 20200201
+func (mgr *RankManager)SetSeasonInfo( id int32, endTime int64 ){
+	mgr.Lock()
+	defer mgr.Unlock()
+	if( mgr.redisClient == nil ){
+		return
+	}
+	mgr.redisClient.SetData( REDIS_RANK_SEASON_ID, id );
+	mgr.redisClient.SetData( REDIS_RANK_SEASON_TIME, endTime )
+}
+
+//获取赛季ID 和 赛季 结束 时间  wjl 20200201
+func (mgr *RankManager )GetSeasonInfo()( int32, int64 ){
+	mgr.Lock()
+	defer mgr.Unlock()
+	if( mgr.redisClient == nil ){
+		return 0,0
+	}
+	seasonID, _ := strconv.ParseInt( mgr.redisClient.GetData( REDIS_RANK_SEASON_ID ),10,32)
+	seasonTime, _  := strconv.ParseInt( mgr.redisClient.GetData( REDIS_RANK_SEASON_TIME ),10,64)
+	return int32(seasonID), seasonTime
 }
 
 //获取排行榜数据
