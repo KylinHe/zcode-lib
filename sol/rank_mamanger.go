@@ -11,6 +11,7 @@ import (
 const(
 	REDIS_RANK_SEASON_ID = "rRankSeasonID_"//赛季ID
 	REDIS_RANK_SEASON_TIME = "rRankSeasonTime_"//赛季结束时间
+	REDIS_RANK_SHOP_TIME = "rRankShopTime_" //竞技场商店的刷新时间
 
 	REDIS_RANK_LEVEL = "rRankLv_" //等级排行
 	REDIS_RANK_LV_TEMP = "trRankLv_"	// 等级排行临时存储
@@ -101,6 +102,23 @@ func (mgr *RankManager )GetSeasonInfo()( int32, int64 ){
 	seasonID, _ := strconv.ParseInt( mgr.redisClient.GetData( REDIS_RANK_SEASON_ID ),10,32)
 	seasonTime, _  := strconv.ParseInt( mgr.redisClient.GetData( REDIS_RANK_SEASON_TIME ),10,64)
 	return int32(seasonID), seasonTime
+}
+
+//设置竞技场  刷新时间 wjl 20200205
+func (mgr *RankManager)SetShopTime( time int64 ){
+	mgr.Lock()
+	defer mgr.Unlock()
+	mgr.assert()
+	mgr.redisClient.SetData(REDIS_RANK_SHOP_TIME, time)
+}
+
+//获取竞技场 刷新时间 wjl 20200205
+func( mgr *RankManager)GetShopTime()int64{
+	mgr.Lock()
+	defer mgr.Unlock()
+	mgr.assert()
+	shopTime, _ := strconv.ParseInt( mgr.redisClient.GetData( REDIS_RANK_SHOP_TIME), 10, 64 )
+	return shopTime
 }
 
 //获取排行榜数据
