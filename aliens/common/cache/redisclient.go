@@ -53,6 +53,8 @@ const (
 
 	OP_SELECE string = "SELECT"
 
+	OP_EXPIRE string = "EXPIRE" //wjl 20200206 添加一个设置过期的KEY
+
 	// set集合
 	OP_S_ADD = "SADD" // 一个或多个成员元素加入到集合中
 	OP_S_MEMBERS = "SMEMBERS"	// 返回集合中的所有的成员
@@ -212,6 +214,18 @@ func (this *RedisCacheClient) SetData(key string, value interface{}) bool {
 	conn := this.getConn()
 	defer conn.Close()
 	_, err := conn.Do(OP_SET, key, value)
+	if (err != nil) {
+		log.Debug("%v", err)
+		return false
+	}
+	return true
+}
+
+// wjl 20200206 设置数据过期时间
+func (this *RedisCacheClient) SetExpire(key string, seconds int) bool {
+	conn := this.getConn()
+	defer conn.Close()
+	_, err := conn.Do(OP_EXPIRE, key, seconds)
 	if (err != nil) {
 		log.Debug("%v", err)
 		return false
