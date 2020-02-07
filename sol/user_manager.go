@@ -35,6 +35,8 @@ type UserManager struct{
 	maxUid       int64            //最大的用户ID
 	redisClient *cache.RedisCacheClient
 	cacheUser []*User	// 缓存个
+
+	expireTime  int //过期时间 wjl 20200206
 }
 
 var userMgr *UserManager
@@ -68,6 +70,8 @@ func (mgr* UserManager)Init( redisInfo string,redisPw string, dbIdx int ,sentine
 		mgr.redisClient.StartSentinel()
 	}
 	mgr.cacheUser = []*User{}
+
+	mgr.expireTime = 30 //暂定30s 就过期
 }
 
 //刷新Redis 【注：只允许 一台服务器进行操作】
@@ -89,6 +93,19 @@ func (mgr *UserManager)InserUser( arrStr []string )*User{
 	}
 	//mgr.redisSave( user )//存入到redis
 	mgr.cacheUser = append(mgr.cacheUser,user)
+	return user
+}
+
+//wjl 20200204 插入用户数据【立刻】
+func (mgr *UserManager)InserUserImm( arrStr []string )*User{
+	mgr.Lock()
+	defer mgr.Unlock()
+	user := &User{}
+	user.Parse( arrStr )
+	if mgr.maxUid < user.Uid { //记录最大的 uid
+		mgr.maxUid = user.Uid
+	}
+	mgr.redisSave( user )
 	return user
 }
 
@@ -328,6 +345,20 @@ func (mgr *UserManager)SaveUser( user *User ){
 	mgr.redisSave( user )
 }
 
+//刷新过期时间 wjl 20200206 刷新过期时间
+func (mgr *UserManager)RefreshExpire( uid int64, acc string ){
+	mgr.Lock()
+	defer mgr.Unlock()
+	
+	if mgr.redisClient == nil{
+		return
+	}
+
+	strUid := strconv.FormatInt(uid,10)
+	mgr.redisClient.SetExpire( REDIS_USER + strUid, mgr.expireTime ) //1s就过期
+	mgr.redisClient.SetExpire( REDIS_ACC + acc, mgr.expireTime ) //1s就过期
+}
+
 // 保存用户数据
 func (mgr *UserManager)redisSave( user *User ){
 	if mgr.redisClient == nil{
@@ -352,8 +383,10 @@ func (mgr *UserManager)redisSave( user *User ){
 	w := zlib.NewWriter(&in)
 	w.Write([]byte(strUser))
 	w.Close()
+
 	redisCmd = append(redisCmd,[]string{cache.OP_H_SET,REDIS_USER + strUid, REDIS_USER_DATA, in.String()})
 	redisCmd = append(redisCmd,[]string{cache.OP_H_SET,REDIS_ACC + user.Account, REDIS_ACC_UID, string(strUid)})
+
 	if len(user.BindAcc) > 2 {	// 有绑定的账号
 		redisCmd = append(redisCmd,[]string{cache.OP_H_SET,REDIS_ACC + user.BindAcc, REDIS_ACC_UID, string(strUid)})
 	}
@@ -369,6 +402,10 @@ func (mgr *UserManager)redisSave( user *User ){
 		redisCmd = append(redisCmd,[]string{cache.OP_H_SET,REDIS_NAME + user.Name, REDIS_NAME_UID, ret })
 	}
 	mgr.redisClient.Send(redisCmd)
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+	mgr.redisClient.SetExpire( REDIS_USER + strUid, mgr.expireTime ) //1s就过期
+	mgr.redisClient.SetExpire( REDIS_ACC + user.Account, mgr.expireTime ) //1s就过期
 }
 
 //获取用户数据
