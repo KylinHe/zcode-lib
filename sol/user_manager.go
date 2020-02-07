@@ -71,7 +71,7 @@ func (mgr* UserManager)Init( redisInfo string,redisPw string, dbIdx int ,sentine
 	}
 	mgr.cacheUser = []*User{}
 
-	mgr.expireTime = 30 //暂定30s 就过期
+	mgr.expireTime = 7*24*60*60 //暂定 7天 就过期
 }
 
 //刷新Redis 【注：只允许 一台服务器进行操作】
@@ -349,7 +349,7 @@ func (mgr *UserManager)SaveUser( user *User ){
 func (mgr *UserManager)RefreshExpire( uid int64, acc string ){
 	mgr.Lock()
 	defer mgr.Unlock()
-	
+
 	if mgr.redisClient == nil{
 		return
 	}
