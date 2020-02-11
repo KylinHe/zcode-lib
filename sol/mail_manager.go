@@ -146,17 +146,20 @@ func (mgr *MailManager) ReadAllDB() {
 	if mgr.redisClient == nil {
 		return
 	}
-	mgr.redisClient.FlushDB()
-	//mgr.redisClient.DelData( REDIS_MAIL )
-	//mgr.redisClient.DelData( REDIS_MAIL_USER )
-
-	//mgr.redisClient.HSet( REDIS_MAIL, "Loaded", false) //设置为加载未完成
+	//mgr.redisClient.FlushDB()
+	mgr.redisClient.DelData( REDIS_MAIL )
+	mgr.redisClient.DelData( REDIS_MAIL_USER )
+	mgr.redisClient.DelData( REDIS_MAIL_GLOBAL )
+	mgr.redisClient.HSet( REDIS_MAIL, "Loaded", false) //设置为加载未完成
 
 	count := 0
 	limit := 1000
 	mails := []*Mail{}
 	for ; ; { //读取所有邮件内容
 		mailsStr := mgr.query(MAIL_SP_SELECT_MAIL, mgr.maxId, limit)
+
+		redisCmd := [][]string{}//wjl 20200210 redis 指令操作
+
 		for _, mailStr := range mailsStr {
 			mail := mgr.parseMail(mailStr)
 			if mail == nil {
@@ -177,11 +180,13 @@ func (mgr *MailManager) ReadAllDB() {
 			if len(jsMail) > 0 { //成功生成 json
 				if mgr.redisClient != nil { //写到 redis 内
 					strId := strconv.FormatInt(mail.ID, 10)
-					mgr.redisClient.HSet(REDIS_MAIL+strId, REDIS_FILED_MAIL, string(jsMail))
+					redisCmd = append(redisCmd,[]string{cache.OP_H_SET, REDIS_MAIL+strId, REDIS_FILED_MAIL, string(jsMail) })
+//					mgr.redisClient.HSet(REDIS_MAIL+strId, REDIS_FILED_MAIL, string(jsMail))
 				}
 			}
 			count++
 		}
+		mgr.redisClient.Send(redisCmd)
 		if count < limit {
 			break
 		}
@@ -192,6 +197,7 @@ func (mgr *MailManager) ReadAllDB() {
 	maxIdx := int32(0) //最大的索引号
 	for ; ; { // 加载用户 邮件-状态
 		userMailStr := mgr.query(MAIL_SP_SELECT_MAIL_USER, maxIdx, limit)
+		redisCmd := [][]string{}//wjl 20200210 redis 指令操作
 		for _, s := range userMailStr {
 			if len(s) < 3 {
 				continue
@@ -199,12 +205,14 @@ func (mgr *MailManager) ReadAllDB() {
 			idx, _ := strconv.Atoi(s[0])
 			strUid := s[1]
 			strFlag := s[2]
-			mgr.redisClient.HSet(REDIS_MAIL_USER+strUid, REDIS_FILED_MAIL_USER, strFlag)
+			redisCmd = append(redisCmd,[]string{cache.OP_H_SET, REDIS_MAIL_USER+strUid, REDIS_FILED_MAIL_USER, strFlag })
+//			mgr.redisClient.HSet(REDIS_MAIL_USER+strUid, REDIS_FILED_MAIL_USER, strFlag)
 			if maxIdx < int32(idx) { //取最大值的 uid
 				maxIdx = int32(idx)
 			}
 			count++
 		}
+		mgr.redisClient.Send(redisCmd)
 		if count < limit {
 			break
 		}

@@ -202,14 +202,21 @@ func (mgr *FriendManager)AddApplyUid( srcUid int64, decUid int64 ,applieMax int)
 	mgr.Lock()
 	defer mgr.Unlock()
 	mgr.assert()
+
+	if srcUid == 0 || decUid == 0{//wjl 20200210 加了一个安全保护 不允许出现 0的状态才对
+		return
+	}
+
 	strUid := strconv.FormatInt(srcUid, 10)
 	strApply := mgr.redisClient.HGet(REDIS_FRIERND+strUid, REDIS_FRIEND_APPLY)
 
-	var applys []int64
-	err := json.Unmarshal([]byte(strApply), &applys)
-	if err != nil{
-		log.Debug("uid (%v) add apply err >> %+v ", srcUid, err )
-		return
+	var applys = []int64{}
+	if strApply != ""{//wjl 20202010 修复了一个 center server 一直报错的问题
+		err := json.Unmarshal([]byte(strApply), &applys)
+		if err != nil{
+			log.Debug("uid (%v) add apply err >> %+v ", srcUid, err )
+			return
+		}
 	}
 	for _, uid := range applys{//遍历看下有没有重复的
 		if uid == decUid{//重复了 就不需要了
