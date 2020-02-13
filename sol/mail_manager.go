@@ -161,6 +161,9 @@ func (mgr *MailManager) ReadAllDB() {
 		redisCmd := [][]string{}//wjl 20200210 redis 指令操作
 
 		for _, mailStr := range mailsStr {
+
+			count++
+
 			mail := mgr.parseMail(mailStr)
 			if mail == nil {
 				continue
@@ -195,7 +198,7 @@ func (mgr *MailManager) ReadAllDB() {
 //					mgr.redisClient.HSet(REDIS_MAIL+strId, REDIS_FILED_MAIL, string(jsMail))
 				}
 			}
-			count++
+
 		}
 		mgr.redisClient.Send(redisCmd)
 		if count < limit {
@@ -207,14 +210,14 @@ func (mgr *MailManager) ReadAllDB() {
 	return
 }
 
-// 校验玩家邮件标识
-func (mgr *MailManager) checkUserMailFlag(mail *Mail, uid int64, regTime int64, flags []*MailFlag) {
+// 这封邮件 是否需要 存在 玩家邮件标识
+func (mgr *MailManager) isExistUserMailFlag(mail *Mail, uid int64, regTime int64, flags []*MailFlag) bool{
 	if mail == nil {
-		return
+		return false
 	}
 	curTime := time.Now().Unix() //获取当前时间
 	if mail.ExpiryTime > 0 && mail.ExpiryTime < curTime {	// you 过期邮件
-		return
+		return false
 	}
 	for _,decUid := range mail.DecUid {
 		if decUid != 0 &&  decUid != uid {
@@ -228,19 +231,17 @@ func (mgr *MailManager) checkUserMailFlag(mail *Mail, uid int64, regTime int64, 
 			}
 		}
 		if isSame {	// 有这封邮件了
-			continue
+			return false
 		}
 		if decUid == 0 && mail.ExpiryTime > 0{//存在过期时间的全服邮件【即 非新手邮件， 后续所有发的 全服邮件】
 			if mail.SendTime < regTime && time.Unix(mail.SendTime,0).YearDay() != time.Unix(regTime,0).YearDay() {	// 当天邮件 当天注册用户可收到
-				continue
+				return false
 			}
 		}
-		flags = append(flags,&MailFlag{
-			ID:   mail.ID,
-			Flag: MAIL_FLAG_UNREAD,
-		})
-		mgr.updateUserMail(uid, flags)
+		return true
+//		mgr.updateUserMail(uid, flags)
 	}
+	return false
 }
 
 // 新邮件，插入数据库
@@ -319,7 +320,12 @@ func (mgr *MailManager) RefreshUserMail(uid int64,regTime int64) []*MailFlag {
 		if mail == nil {
 			continue
 		}
-		mgr.checkUserMailFlag( mail,uid, regTime, mailFlags )
+		if mgr.isExistUserMailFlag( mail,uid, regTime, mailFlags ) == true{
+			mailFlags = append(mailFlags,&MailFlag{
+				ID:   mail.ID,
+				Flag: MAIL_FLAG_UNREAD,
+			})
+		}
 	}
 //>>>>>>>>>>>>>>>>>>>>>>>> 检验单人邮件
 	ids = mgr.redisClient.SGetAllMember(REDIS_MAIL_TARGET+strUid) //获取关于这个玩家的所有邮件(非全局)
@@ -329,34 +335,15 @@ func (mgr *MailManager) RefreshUserMail(uid int64,regTime int64) []*MailFlag {
 		if mail == nil {
 			continue
 		}
-		mgr.checkUserMailFlag( mail,uid, regTime, mailFlags )
+		if mgr.isExistUserMailFlag( mail,uid, regTime, mailFlags ) == true{
+			mailFlags = append(mailFlags,&MailFlag{
+				ID:   mail.ID,
+				Flag: MAIL_FLAG_UNREAD,
+			})
+		}
 	}
-	mgr.updateUserMail(uid, mailFlags) //更新回 redis /mysql
-	return mailFlags
 
-//	mailFlags := mgr.getUserMail(uid)
-//	//>>>>>>>>>>>>>>>> 在看看有没有需要新增的群邮件
-//	for _, id := range globalIds { //全局的邮件ID
-//		var found bool = false
-//		for _, mailFlag := range mailFlags {
-//			if mailFlag.ID == id {
-//				found = true
-//				break
-//			}
-//		}
-//		if found {
-//			continue
-//		}
-//		mailDB := mgr.getMail(id)
-//		if mailDB == nil { continue }
-//		if mailDB.ExpiryTime > 0 {	// 这玩家还没注册就发了这邮件，或者过期了  不给他
-//			if mailDB.ExpiryTime < time.Now().Unix() { continue }
-//			if mailDB.SendTime < regTime && time.Unix(mailDB.SendTime,0).YearDay() != time.Unix(regTime,0).YearDay() {	// 当天邮件 当天注册用户可收到
-//				continue
-//			}
-//		}
-//		mailFlags = append(mailFlags, &MailFlag{ID: id, Flag: MAIL_FLAG_UNREAD})
-//	}
+//>>>>>>
 	mgr.updateUserMail(uid, mailFlags) //更新回 redis /mysql
 	return mailFlags
 }
@@ -469,6 +456,7 @@ func (mgr *MailManager) parseMail(arrStr []string) *Mail { // 解析邮件字符
 			mail.DecUid = append(mail.DecUid, id)
 		}
 	}
+
 	mail.Title = arrStr[4]                                   //标题
 	mail.Content = arrStr[5]                                 //内容
 	mail.Gift = arrStr[6]                                    //附件
