@@ -366,7 +366,8 @@ const (
 	RespArenaStart int32 = 18504; //响应 客户端战斗开始
 	RespArenaEnd   int32 = 18505; //响应 客户端战斗结束
 	RespHonorShop int32 = 18506	// 响应 荣耀商店
-	FwArenaGenMonster int32 = 18507;// 转发 怪物升级
+	FwArenaGenMonster int32 = 18507// 转发 竞技场怪物每次拖动生成( 机器人专用 )
+	RespGenMonster int32 = 18550//转发 竞技场怪物每次拖动生成(真人专用)
 	RespArenaRoundEnd int32 = 18508	// 响应 战斗结束（客户端表现结束）
 	RespRecArenaReward int32 = 18509// 响应 竞技场奖励领取
 	RespArenaRank int32 = 18510		// 响应 竞技场排行

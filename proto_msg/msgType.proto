@@ -408,7 +408,8 @@ message GS2C{//响应类型消息
 	optional Resp_Arena_Start_ Resp_Arena_Start = 18504;//响应 客户端战斗开始
 	optional Resp_Arena_End_ Resp_Arena_End = 18505;//响应 客户端战斗结束
     optional Resp_Honor_Shop_ Resp_Honor_Shop = 18506;  // 响应 荣耀商店
-    optional Fw_Arena_GenMonster_ Fw_Arena_GenMonster = 18507;  // 转发 战斗消除
+    optional Fw_Arena_GenMonster_ Fw_Arena_GenMonster = 18507;  // 转发 战斗消除 wjl 20200219 竞技场机器人专用消息包
+	optional Resp_Arena_GenMonster_ Resp_Arena_GenMonster = 18550;  // 转发 竞技场回合拖动怪物 wjl 20200219 真人玩家使用
     optional Resp_Arena_Round_End_ Resp_Arena_Round_End = 18508;// 响应 战斗结束（客户端表现结束）
     optional Resp_Arena_Rank_ Resp_Arena_Rank = 18510;  // 响应 竞技场排行榜
     optional Resp_Honor_Buy_ Resp_Honor_Buy = 18511;    // 响应 竞技场荣耀商店购买

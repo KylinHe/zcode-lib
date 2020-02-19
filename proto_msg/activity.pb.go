@@ -58,6 +58,7 @@ It has these top-level messages:
 	Resp_Get_RedPacket_
 	Arena_Rank_Info_
 	Arena_Monster_Info_
+	Arena_Battle_MonsterInfo_
 	Arena_Player_Info
 	Req_Arena_Rank_
 	Resp_Arena_Rank_
@@ -75,6 +76,7 @@ It has these top-level messages:
 	Req_Arena_Start_
 	Resp_Arena_Start_
 	Req_Arena_GenMonster_
+	Resp_Arena_GenMonster_
 	Fw_Arena_GenMonster_
 	Req_Arena_Round_
 	Resp_Arena_Round_

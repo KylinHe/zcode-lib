@@ -18,6 +18,15 @@ message Arena_Monster_Info_ {
     repeated int32 TalentLv = 3;// 觉醒等级
 }
 
+message Arena_Battle_MonsterInfo_{//wjl 20200218 竞技场战斗过程中的怪物数据
+	optional int32 ID = 1;//唯一ID * 100000 + 家族ID
+	optional int32 Lv = 2;//等级
+	optional int32 Hp = 3;//血量(为了防止在场怪物数量过多，超出的怪物 会转化为血量)
+	optional int32 Pos = 4;//坐标( x*10000 + y )
+	repeated int32 SkillLv = 5;// 被动技能等级
+	repeated int32 TalentLv = 6;// 觉醒等级
+}
+
 message Arena_Player_Info{//竞技场的玩家数据
 	optional int64 Uid = 1;//用户ID
 	optional string Name = 2;//用户昵称
@@ -163,10 +172,17 @@ message Resp_Arena_Start_{
 message Req_Arena_GenMonster_ {
 	optional int64 UserID = 1;
 	optional int32 Step = 2;	// 当前是第几步
-	repeated BattleHeroInfo_ HeroInfos = 3;
+	repeated Arena_Battle_MonsterInfo_ HeroInfos = 3;
 }
 
-// 转发 战斗中消除
+// 转发 战斗中消除(真人玩家使用)
+message Resp_Arena_GenMonster_{
+	optional int64 UserID = 1;
+	optional int32 Step = 2;	// 当前是第几步
+	repeated Arena_Battle_MonsterInfo_ HeroInfos = 3;
+}
+
+// 转发 战斗中消除(机器人使用)
 message Fw_Arena_GenMonster_ {
 	optional int64 UserID = 1;
 	optional int32 Step = 2;	// 当前是第几步
@@ -176,7 +192,7 @@ message Fw_Arena_GenMonster_ {
 //请求回合结束（消除结束，准备开始战斗）
 message Req_Arena_Round_{
 	optional TableInfo_ TableInfo = 1;//沙盘数据
-	repeated BattleHeroInfo_ HeroInfos = 2;//战斗中的英雄数据
+	repeated Arena_Battle_MonsterInfo_ HeroInfos = 2;//战斗中的英雄数据
 	optional int64 UserID = 3;	// 服务端用
 	optional int32 Power = 4;	// 战力
 }
@@ -184,8 +200,8 @@ message Req_Arena_Round_{
 //响应回合结束( 只有两边都结束， 或者倒计时结束才会下发 )
 message Resp_Arena_Round_{
 	optional int64 Victor = 1;// 获胜方
-	repeated BattleHeroInfo_ HeroRed = 2;//红方英雄数据( 同步数据用 )
-	repeated BattleHeroInfo_ HeroBlud = 3;//蓝方英雄数据( 同步数据用 )
+	repeated Arena_Battle_MonsterInfo_ HeroRed = 2;//红方英雄数据( 同步数据用 )
+	repeated Arena_Battle_MonsterInfo_ HeroBlud = 3;//蓝方英雄数据( 同步数据用 )
 	optional int64 RandSed = 4;// 客户端用来计算战斗的随机种子
 	optional int64 UserID = 5;	// 服务端用
 }
@@ -254,7 +270,7 @@ message Resp_Arena_Reconn_ {
 	optional int32 RemainStep = 7;// 剩余的消除步数
 	optional int64 EndTime = 8;//回合的结束时间
 	optional int32 Status = 9;	// 状态：0 none 1 在消除 2 在战斗
-	repeated BattleHeroInfo_ Heroes = 10;//我方英雄数据
+	repeated Arena_Battle_MonsterInfo_ Heroes = 10;//我方英雄数据
 }
 
 // 请求 竞技场断线后重新开始
