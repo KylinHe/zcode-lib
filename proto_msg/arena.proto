@@ -192,9 +192,10 @@ message Fw_Arena_GenMonster_ {
 //请求回合结束（消除结束，准备开始战斗）
 message Req_Arena_Round_{
 	optional TableInfo_ TableInfo = 1;//沙盘数据
-	repeated Arena_Battle_MonsterInfo_ HeroInfos = 2;//战斗中的英雄数据
-	optional int64 UserID = 3;	// 服务端用
-	optional int32 Power = 4;	// 战力
+	repeated Arena_Battle_MonsterInfo_ HeroSelf = 2;//战斗中的英雄数据
+	repeated Arena_Battle_MonsterInfo_ HeroRobot = 3;//如果对战方是机器人的话 就得上传 机器人的数据上来
+	optional int64 UserID = 4;	// 服务端用
+	optional int32 Power = 5;	// 战力
 }
 
 //响应回合结束( 只有两边都结束， 或者倒计时结束才会下发 )
