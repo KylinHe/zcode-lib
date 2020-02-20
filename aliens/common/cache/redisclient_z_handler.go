@@ -10,6 +10,7 @@
 package cache
 
 import (
+	"fmt"
 	"github.com/garyburd/redigo/redis"
 	"github.com/KylinHe/zcode-lib/aliens/log"
 	"errors"
@@ -140,10 +141,11 @@ func (this *RedisCacheClient)ZRemRangeByRank(key string,start int32,stop int32) 
 func (this *RedisCacheClient)ZRem(key string,member ...interface{}) bool {
 	conn := this.getConn()
 	defer conn.Close()
-	_,err := conn.Do(OP_Z_REM,key,member)
-	if  err != nil {
-		//log.Error("%v",err)
-		return false
+	for _,v:=range member {
+		_,err := conn.Do(OP_Z_REM,key,v.(string))
+		if  err != nil {
+			return false
+		}
 	}
 	return true
 }
