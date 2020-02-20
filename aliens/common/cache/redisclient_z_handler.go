@@ -10,7 +10,6 @@
 package cache
 
 import (
-	"fmt"
 	"github.com/garyburd/redigo/redis"
 	"github.com/KylinHe/zcode-lib/aliens/log"
 	"errors"
