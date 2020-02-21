@@ -80,6 +80,7 @@ It has these top-level messages:
 	Fw_Arena_GenMonster_
 	Req_Arena_Round_
 	Resp_Arena_Round_
+	Fw_Arena_Round_
 	Req_Arena_Round_End_
 	Resp_Arena_Round_End_
 	Req_Arena_Exit_
