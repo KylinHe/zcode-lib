@@ -1,17 +1,18 @@
 package sol
 
 import (
-	"sync"
 	"github.com/KylinHe/zcode-lib/aliens/common/cache"
-	"time"
-	"strconv"
 	"sort"
+	"strconv"
 	"strings"
+	"sync"
+	"time"
 )
 const(
 	REDIS_RANK_SEASON_ID = "rRankSeasonID_"//赛季ID
 	REDIS_RANK_SEASON_TIME = "rRankSeasonTime_"//赛季结束时间
 	REDIS_RANK_SHOP_TIME = "rRankShopTime_" //竞技场商店的刷新时间
+
 
 	REDIS_RANK_LEVEL = "rRankLv_" //等级排行
 	REDIS_RANK_LV_TEMP = "trRankLv_"	// 等级排行临时存储
@@ -32,6 +33,7 @@ type RankInfo struct{//排行榜信息
 	Uid int64
 	Value int64
 	Rank int32 //排名 -1 表示未在排名内
+	Info string  //竞技场详细信息，如果请求的不是竞技场，该字段为空
 }
 
 type RankManager struct{
@@ -195,10 +197,14 @@ func (mgr *RankManager) GetRankByRange(rankKey string,begin int32,end int32) []R
 	for _, r := range ranks {
 		begin += 1//默认从 0 开始
 		info := RankInfo{}
-		info.Uid, _ = strconv.ParseInt( r.Member, 10, 64 )
+		//如果为竞技场排行榜，则先不赋值 id ，先把竞技场详情信息的json 字符串赋值 ，然后通过后面解析 获取Uid
+		if rankKey == REDIS_RANK_ARENA{
+			info.Info = r.Member
+		}else{
+			info.Uid, _ = strconv.ParseInt( r.Member, 10, 64 )
+		}
 		info.Value = r.Score
 		info.Rank = begin
-
 		infos = append( infos, info )
 	}
 	return infos
@@ -214,19 +220,16 @@ func (mgr *RankManager) GetRankLen(rankKey string) int {
 	return len(ranks)
 }
 
+
 // 更行排行榜
-func (mgr *RankManager) Update(rankKey string, uId int64, value interface{}) {
+func (mgr *RankManager) Update(rankKey string, member string, value interface{}) {
 	mgr.Lock()
 	defer mgr.Unlock()
-
 	if mgr.redisClient == nil{
 		return
 	}
-	uIDStr := strconv.FormatInt(uId,10)
-	mgr.redisClient.ZAdd(rankKey, value, uIDStr)
-
+	mgr.redisClient.ZAdd(rankKey, value, member)
 	ranks := mgr.redisClient.ZRevRangeWithScore(rankKey, 0, -1)	//获取该key 下面的所有数据
-
 	rankMax := MAX_RANK_DEFAULT
 	if strings.HasPrefix(rankKey,REDIS_RANK_LEVEL) {
 		rankMax = MAX_RANK_LEVEL
@@ -284,11 +287,13 @@ func (mgr *RankManager) CleanRank(rankKey string) {
 }
 
 // 移除排行行指定元素
-func (mgr *RankManager) RemRankMember(rankKey string,member ...interface{}) {
+func (mgr *RankManager) RemRankMember(rankKey string,member ...interface{}) {  //member为一个 []interface  {}
 	mgr.Lock()
 	defer mgr.Unlock()
 	mgr.assert()
-	mgr.redisClient.ZRem(rankKey,member)
+	for _,v:=range member{
+		mgr.redisClient.ZRem(rankKey,v)
+	}
 }
 
 func (mgr *RankManager)assert(){
