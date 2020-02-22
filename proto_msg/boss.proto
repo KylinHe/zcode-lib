@@ -47,6 +47,7 @@ message Resp_Boss_Info_{
 	optional bool CanHit = 10;	// 是否可攻打
 	optional int32 AddTimesPrice = 11;	// 增加次数消耗钻石
 	optional int64 HitBossDuration = 12;	// 打boss的战斗时长
+	optional int32 BossLv = 13;//世界boss 等级,用于查询排行榜用
 }
 
 // 请求 攻击boss
@@ -67,6 +68,7 @@ message Resp_Hit_Boss_ {
 	optional PlayerBoss_Info_ PlayerInfo = 4;// 玩家数据
 	optional int64 BossCurHp = 5;	// boss当前血量
 	repeated Reward_Info_ SpeRewards = 6;	// 特殊奖励	没有则为空
+	optional int32 BossLv = 7;//世界boss 等级,用于查询排行榜用
 }
 
 // 请求 获取世界boss排名
