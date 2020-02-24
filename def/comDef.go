@@ -446,10 +446,6 @@ const (
 	ActNewContinueCharge            // 19 新手连续充值活动
 	ActFixedDateSign				// 20 固定日期签到
 	ActItemExchange					// 21 道具兑换
-
-	ActDailyLimtGift  				// 22 每日限购礼包 wjl 20200220
-	ActWeeklyLimitGift				// 23 每周限购礼包 wjl 20200220
-	ActMonthlyLimitGift				// 24 每月限购礼包 wjl 20200220
 )
 
 // 特权
