@@ -220,6 +220,25 @@ func (mgr *RankManager) GetRankLen(rankKey string) int {
 	return len(ranks)
 }
 
+// 批量更新排行榜
+func (mgr *RankManager)UpdateBatch( rankKey string, member []string, values []int32){
+	mgr.Lock()
+	defer mgr.Unlock()
+	if mgr.redisClient == nil{
+		return
+	}
+
+	c := mgr.redisClient.GetConn()
+//	cmd := [][]string{}
+	for i, m := range member{
+		c.Send("ZADD",rankKey, values[i], m)
+//		cmd = append( cmd,[]string{cache.OP_Z_ADD, rankKey, values[i], m } )
+	}
+//	c.Send( cmd )
+	c.Flush()
+	c.Receive()
+	c.Close()
+}
 
 // 更行排行榜
 func (mgr *RankManager) Update(rankKey string, member string, value interface{}) {
