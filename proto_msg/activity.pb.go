@@ -91,6 +91,7 @@ It has these top-level messages:
 	Req_Arena_Reconn_Start_
 	Req_Recv_Arena_Box_
 	Resp_Recv_Arena_Box_
+	Resp_Arena_SeasonEnd_
 	Attr_Info_
 	Equip_Info_
 	TableGridInfo_

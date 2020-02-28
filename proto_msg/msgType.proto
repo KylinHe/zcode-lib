@@ -417,6 +417,8 @@ message GS2C{//响应类型消息
     optional Resp_Arena_Reconn_ Resp_Arena_Reconn = 18512;  // 响应 竞技场断线重连
     optional Resp_Recv_Arena_Box_ Resp_Recv_Arena_Box = 18514;  // 响应 竞技场领取
     optional Resp_Arena_OpenTime_ Resp_Arena_OpenTime = 18515; // 响应 竞技场开放时间
+	optional Resp_Arena_SeasonEnd_ Resp_Arena_SeasonEnd = 18520; //通知竞技场结算了
+
 // 矿战  18701 - 18750
     optional Resp_Get_MineInfo_ Resp_Get_MineInfo = 18701;  // 响应 矿山信息
     optional Resp_Save_MineHeroes_ Resp_Save_MineHeroes = 18702;// 响应 保存守矿阵容（开采）

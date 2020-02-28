@@ -58,6 +58,7 @@ message Req_Hit_Boss_ {
 	optional TableInfo_ TableInfo = 4;//沙盘数据
 	optional int64 HitDuration = 5;	// 攻击boss的持续时间
 	optional int32 Step = 6;	// 消除步数
+	optional int32 SumDamage = 7;// 玩家获得总伤害
 }
 
 // 响应 攻击boss

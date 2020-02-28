@@ -375,6 +375,8 @@ const (
 	RespArenaReconn int32 = 18512	// 响应 竞技场断线重连
 	RespRecvArenaBox int32 = 18514	// 响应 竞技场宝箱领取
 	RespArenaOpenTime int32 = 18515	// 响应 竞技场开放时间
+	RespArenaSeasonEnd int32 = 18520 // 通知可以结算啦
+	
 	// 矿战
 	RespGetMineInfo      int32 = 18701 // 响应 矿山信息
 	RespSaveMineHeroes   int32 = 18702 // 响应 保存守矿阵容

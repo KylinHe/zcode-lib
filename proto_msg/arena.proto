@@ -197,6 +197,7 @@ message Req_Arena_Round_{
 	repeated Arena_Battle_MonsterInfo_ HeroRobot = 3;//如果对战方是机器人的话 就得上传 机器人的数据上来
 	optional int64 UserID = 4;	// 服务端用
 	optional int32 Power = 5;	// 战力
+	optional int32 Victory = 6;//客户端 发送上来的胜利方(0x00:平局 0x01:红方 0x02:蓝方)
 }
 
 //响应回合结束( 只有两边都结束， 或者倒计时结束才会下发 )
@@ -296,4 +297,8 @@ message Resp_Recv_Arena_Box_ {
 	// optional Chest_Info_ ChestInfo = 1;// 获胜方获得的宝箱
 	optional int32 ChestIcon = 1;	// 宝箱icon
 	repeated Reward_Info_ ChestRewards = 2;// 宝箱展示
+}
+
+
+message Resp_Arena_SeasonEnd_{//通知竞技场结算了
 }
