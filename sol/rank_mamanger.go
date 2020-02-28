@@ -227,7 +227,9 @@ func (mgr *RankManager)UpdateBatch( rankKey string, member []string, values []in
 	if mgr.redisClient == nil{
 		return
 	}
-
+	if member == nil || values == nil{
+		return
+	}
 	c := mgr.redisClient.GetConn()
 //	cmd := [][]string{}
 	for i, m := range member{
@@ -245,6 +247,10 @@ func (mgr *RankManager) Update(rankKey string, member string, value interface{})
 	mgr.Lock()
 	defer mgr.Unlock()
 	if mgr.redisClient == nil{
+		return
+	}
+	
+	if value == nil{
 		return
 	}
 	mgr.redisClient.ZAdd(rankKey, value, member)
