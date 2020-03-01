@@ -253,6 +253,7 @@ func (mgr *RankManager) Update(rankKey string, member string, value interface{})
 	if value == nil{
 		return
 	}
+
 	mgr.redisClient.ZAdd(rankKey, value, member)
 	ranks := mgr.redisClient.ZRevRangeWithScore(rankKey, 0, -1)	//获取该key 下面的所有数据
 	rankMax := MAX_RANK_DEFAULT
@@ -316,6 +317,11 @@ func (mgr *RankManager) RemRankMember(rankKey string,member ...interface{}) {  /
 	mgr.Lock()
 	defer mgr.Unlock()
 	mgr.assert()
+
+	if member == nil{
+		return
+	}
+
 	for _,v:=range member{
 		mgr.redisClient.ZRem(rankKey,v)
 	}
