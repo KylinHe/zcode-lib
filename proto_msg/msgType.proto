@@ -106,6 +106,9 @@ message C2GS{//请求类型消息
 
     optional Req_Receive_RedPacket_ Req_Receive_RedPacket = 5114;
     optional Req_Get_RedPacket_ Req_Get_RedPacket = 5115;
+
+	optional Req_LimitShop_Info_ Req_LimitShop_Info = 5120; //请求限购商店信息
+	
 //战斗相关
     optional Req_ChapterInfo_ Req_ChapterInfo = 6000; //客户端请求关卡数据
     optional Req_ChapterNode_PickUp_ Req_ChapterNode_PickUp = 6005;//客户请求拾取关卡奖励
@@ -339,6 +342,7 @@ message GS2C{//响应类型消息
     optional Resp_Exchange_Item_Data_ Resp_Exchange_Item_Data = 15113;  // 活动兑换道具
     optional Resp_Receive_RedPacket_ Resp_Receive_RedPacket = 15114;
     optional Resp_Get_RedPacket_ Resp_Get_RedPacket = 15115;
+	optional Resp_LimitShop_Info_ Resp_LimitShop_Info = 15120;//响应限购商店信息
 //战斗相关
     optional Resp_ChapterInfo_ Resp_ChapterInfo = 16000; //响应关卡数据请求
     optional Resp_ChapterNode_PickUp_ Resp_ChapterNode_PickUp = 16005;//响应关卡拾取

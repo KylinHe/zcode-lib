@@ -46,6 +46,7 @@ const (
 	RewardPublicHeroPro			   // 公用英雄熟练度 21
 	RewardPublicHeroClip		   // 公用英雄碎片 22
 	RewardDrawEquip				   // 抽装备 23
+	RewardLimitShop					// 限购商店 24
 )
 
 // 货币类型

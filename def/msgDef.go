@@ -89,6 +89,8 @@ const (
 	ReqContinueChargeRec int32 = 5111  // 请求 连续充值奖励领取
 	ReqReceiveRedPacket  int32 = 5114  // 请求领取红包
 	ReqGetRedPacket  	 int32 = 5115	// 请求 获取红包
+	ReqLimitShopInfo	 int32 = 5120	// 请求限购商店信息 wjl 20200302
+
 	ReqChapterInfo       int32 = 6000 //请求关卡静态信息
 	ReqChapterNodePickUp int32 = 6005 //请求关卡奖励拾取
 
@@ -292,24 +294,25 @@ const (
 	RespActRewardRec int32 = 15102	// 响应 活动奖励领取
 	RespDraw		 int32 = 15104	// 响应 限时抽卡
 	RespRecDraw		 int32 = 15105	// 响应 领取抽卡积分奖励
-	RespGrowthCapital int32 = 15106	// 响应 成长基金
-	RespPrizeWheel	 int32 = 15107	// 响应 大转盘
-	RespDataActivityUpdate int32 = 15108	// 响应 
-	RespUpdatePlayerPrivileges int32 = 15109	// 更新玩家特权
-	RespContinueChargeRec int32 = 15111;	// 连续充值奖励领取
-	RespExchangeItemData int32 = 15113 // 活动兑换道具
-	RespReceiveRedPacket  int32 = 15114  // 请求领取红包
-	RespGetRedPacket  	 int32 = 15115	// 请求 获取红包
+	RespGrowthCapital 			int32 = 15106	// 响应 成长基金
+	RespPrizeWheel	 			int32 = 15107	// 响应 大转盘
+	RespDataActivityUpdate 		int32 = 15108	// 响应
+	RespUpdatePlayerPrivileges	int32 = 15109	// 更新玩家特权
+	RespContinueChargeRec		int32 = 15111;	// 连续充值奖励领取
+	RespExchangeItemData		int32 = 15113 // 活动兑换道具
+	RespReceiveRedPacket		int32 = 15114  // 请求领取红包
+	RespGetRedPacket			int32 = 15115	// 请求 获取红包
+	RespLimitShopInfo			int32 = 15120 //响应限购商店信息 wjl 20200302
 
-	RespChapterInfo       int32 = 16000 //回复关卡静态数据
-	RespChapterNodePickUp int32 = 16005 //回复章节关卡拾取
-	RespChapterBattleSet int32 = 16010	// 响应 关卡数据设置
-	RespChapterNodeState	int32 = 16020 //响应客户端请求设置关卡状态
-	RespChapterState		int32 = 16021 //响应客户端请求章节通关
-	RespChapterMopUp		int32 = 16022 //响应客户端章节扫荡
-	PushTableUpdate			int32 = 16023	// 推送 沙盘数据更新（替换阵容后的push）
+	RespChapterInfo       		int32 = 16000 //回复关卡静态数据
+	RespChapterNodePickUp 		int32 = 16005 //回复章节关卡拾取
+	RespChapterBattleSet 		int32 = 16010	// 响应 关卡数据设置
+	RespChapterNodeState		int32 = 16020 //响应客户端请求设置关卡状态
+	RespChapterState			int32 = 16021 //响应客户端请求章节通关
+	RespChapterMopUp			int32 = 16022 //响应客户端章节扫荡
+	PushTableUpdate				int32 = 16023	// 推送 沙盘数据更新（替换阵容后的push）
 	
-	RespTaskReceive int32 = 16300 //客户端请求任务领取
+	RespTaskReceive 			int32 = 16300 //客户端请求任务领取
 	RespGetDailyTask int32 = 16301	// 响应 获取每日任务
 	RespDailyTaskUpdate int32 = 16302	// 更新每日任务进度
 	RespCliRewardRece int32 = 16303
