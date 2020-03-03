@@ -379,7 +379,7 @@ const (
 	RespRecvArenaBox int32 = 18514	// 响应 竞技场宝箱领取
 	RespArenaOpenTime int32 = 18515	// 响应 竞技场开放时间
 	RespArenaSeasonEnd int32 = 18520 // 通知可以结算啦
-	
+	RespArenaRoundEx int32 = 18530  //wjl 20200303  额外消息包敌方上传 Req_Arena_Round_ 之后传给对方的
 	// 矿战
 	RespGetMineInfo      int32 = 18701 // 响应 矿山信息
 	RespSaveMineHeroes   int32 = 18702 // 响应 保存守矿阵容

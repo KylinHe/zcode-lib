@@ -412,6 +412,7 @@ message GS2C{//响应类型消息
 	optional Resp_Arena_Start_ Resp_Arena_Start = 18504;//响应 客户端战斗开始
 	optional Resp_Arena_End_ Resp_Arena_End = 18505;//响应 客户端战斗结束
     optional Resp_Honor_Shop_ Resp_Honor_Shop = 18506;  // 响应 荣耀商店
+
     optional Fw_Arena_GenMonster_ Fw_Arena_GenMonster = 18507;  // 转发 战斗消除 wjl 20200219 竞技场机器人专用消息包
 	optional Resp_Arena_GenMonster_ Resp_Arena_GenMonster = 18550;  // 转发 竞技场回合拖动怪物 wjl 20200219 真人玩家使用
 	optional Fw_Arena_Round_ Fw_Arena_Round = 18551;  // 转发 战斗消除 wjl 20200219 竞技场机器人怪物拖完消息
@@ -422,6 +423,8 @@ message GS2C{//响应类型消息
     optional Resp_Recv_Arena_Box_ Resp_Recv_Arena_Box = 18514;  // 响应 竞技场领取
     optional Resp_Arena_OpenTime_ Resp_Arena_OpenTime = 18515; // 响应 竞技场开放时间
 	optional Resp_Arena_SeasonEnd_ Resp_Arena_SeasonEnd = 18520; //通知竞技场结算了
+
+	optional Resp_Arena_RoundEx_ Resp_Arena_RoundEx = 18530; //wjl 20200303  额外消息包敌方上传 Req_Arena_Round_ 之后传给对方的
 
 // 矿战  18701 - 18750
     optional Resp_Get_MineInfo_ Resp_Get_MineInfo = 18701;  // 响应 矿山信息
