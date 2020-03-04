@@ -131,6 +131,9 @@ type User struct {
 	SpendRewards string `json:"g0"`	// 累计消费奖励id
 	SpendDiamond int32 `json:"k1"`	// 累计消费值
 	PayShopId int32	`json:"k2"`	// 支付商品id
+
+	LimitShopID []int32 `json:"k3"` //拥有的限购商店的ID
+	LimitShopTimes [][]int32 `json:"k4"`//限购商店的购买次数
 }
 
 func (u *User) Parse(arrStr []string) {
