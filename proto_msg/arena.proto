@@ -305,8 +305,8 @@ message Resp_Arena_SeasonEnd_{//通知竞技场结算了
 
 message Resp_Arena_RoundEx_{//wjl 20200303  额外消息包敌方上传 Req_Arena_Round_ 之后传给对方的
 
-	optional int32 Uid = 1;//服务器专用字段 用于 确认发给谁
-	optional int32 EnemyUid = 2;//敌人的用户ID 用于方便客户端进行角色定位
+	optional int64 Uid = 1;//服务器专用字段 用于 确认发给谁
+	optional int64 EnemyUid = 2;//敌人的用户ID 用于方便客户端进行角色定位
 	repeated Arena_Battle_MonsterInfo_ EnemyHeros = 3;//战斗中的英雄数据
 
 }
