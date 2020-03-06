@@ -326,4 +326,8 @@ message Resp_LimitShop_Info_{
 
 //响应限购商店购买
 message Resp_LimitShop_Buy_{
+	optional int32 Type = 1;//类型
+	optional int32 Idx = 2;//第几个(0,1,2,3)
+	optional int32 Times= 3;//目前已购买了几次
+	repeated Reward_Info_ Rewards = 4;  // 奖励
 }
