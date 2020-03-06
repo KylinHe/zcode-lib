@@ -317,3 +317,7 @@ message Resp_LimitShop_Info_{
 	repeated Limit_Shop_Info_ Infos = 1;//限购商店的信息
 
 }
+
+//响应限购商店购买
+message Resp_LimitShop_Buy_{
+}

@@ -343,6 +343,7 @@ message GS2C{//响应类型消息
     optional Resp_Receive_RedPacket_ Resp_Receive_RedPacket = 15114;
     optional Resp_Get_RedPacket_ Resp_Get_RedPacket = 15115;
 	optional Resp_LimitShop_Info_ Resp_LimitShop_Info = 15120;//响应限购商店信息
+	optional Resp_LimitShop_Buy_ Resp_LimitShop_Buy = 15121;//响应限购商店购买
 //战斗相关
     optional Resp_ChapterInfo_ Resp_ChapterInfo = 16000; //响应关卡数据请求
     optional Resp_ChapterNode_PickUp_ Resp_ChapterNode_PickUp = 16005;//响应关卡拾取

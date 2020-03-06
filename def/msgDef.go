@@ -303,7 +303,8 @@ const (
 	RespReceiveRedPacket		int32 = 15114  // 请求领取红包
 	RespGetRedPacket			int32 = 15115	// 请求 获取红包
 	RespLimitShopInfo			int32 = 15120 //响应限购商店信息 wjl 20200302
-
+	RespLimitShopBuy			int32 = 15121 //响应限购商店购买
+		
 	RespChapterInfo       		int32 = 16000 //回复关卡静态数据
 	RespChapterNodePickUp 		int32 = 16005 //回复章节关卡拾取
 	RespChapterBattleSet 		int32 = 16010	// 响应 关卡数据设置
