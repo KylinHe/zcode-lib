@@ -312,7 +312,13 @@ message Resp_Get_RedPacket_ {
 message Req_LimitShop_Info_{
 }
 
-//相应限购商店信息
+//请求限购商店免费领取(注：仅作用于免费商店)
+message Req_LimitShop_Free_{
+	optional int32 ID = 1;//限购商店的ID
+	optional int32 Idx = 2;//第几个( 0, 1, 2, 3 )
+}
+
+//响应限购商店信息
 message Resp_LimitShop_Info_{
 	repeated Limit_Shop_Info_ Infos = 1;//限购商店的信息
 

@@ -71,8 +71,8 @@ const (
 	ReqEquipScoreShopUp int32 = 2512	// 请求 装备积分商店更新
 	ReqEquipScoreShopBuy int32 = 2513// 请求 装备积分商店购买
 
-	ReqChatInfo int32 = 2551;//请求聊天历史数据
-	ReqChatSend int32 = 2552;//请求聊天数据发送
+	ReqChatInfo int32 = 2551 //请求聊天历史数据
+	ReqChatSend int32 = 2552 //请求聊天数据发送
 	ReqBattleChatSend int32 = 2554	// 请求 竞技场聊天
 
 	ReqMailList          int32 = 5000 //请求邮件数据
@@ -90,7 +90,9 @@ const (
 	ReqReceiveRedPacket  int32 = 5114  // 请求领取红包
 	ReqGetRedPacket  	 int32 = 5115	// 请求 获取红包
 	ReqLimitShopInfo	 int32 = 5120	// 请求限购商店信息 wjl 20200302
+	ReqLimitShopFree	 int32 = 5121   //请求限购商店免费领取 wjl 20200306
 
+	
 	ReqChapterInfo       int32 = 6000 //请求关卡静态信息
 	ReqChapterNodePickUp int32 = 6005 //请求关卡奖励拾取
 

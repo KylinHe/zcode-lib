@@ -107,8 +107,9 @@ message C2GS{//请求类型消息
     optional Req_Receive_RedPacket_ Req_Receive_RedPacket = 5114;
     optional Req_Get_RedPacket_ Req_Get_RedPacket = 5115;
 
-	optional Req_LimitShop_Info_ Req_LimitShop_Info = 5120; //请求限购商店信息
-	
+	optional Req_LimitShop_Info_ Req_LimitShop_Info = 5120;//请求限购商店信息
+	optional Req_LimitShop_Free_ Req_LimitShop_Free = 5121;//请求限购商店免费领取
+
 //战斗相关
     optional Req_ChapterInfo_ Req_ChapterInfo = 6000; //客户端请求关卡数据
     optional Req_ChapterNode_PickUp_ Req_ChapterNode_PickUp = 6005;//客户请求拾取关卡奖励
