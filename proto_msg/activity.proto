@@ -28,17 +28,20 @@ message Activity_Reward_Info_ {
 //限购商店单个商品数据 wjl 20200302
 message Limit_ShopItem_Info_{
 	optional int32 Diamond = 1;//需求的钻石价格【预留字段】
-	optional int32 ShopID = 2;//价格
+	optional int32 ShopID = 2;//商店ID 通过此ID 获得 价格
 	optional int32 BuyTimes = 3;//购买次数
 	optional int32 BuyTimesMax = 4;//购买的上限次数【预留】
-	repeated Reward_Info_ Rewards = 5;//商品信息
+	optional int32 DisCount = 5;//折扣
+	optional int32 Tag = 6;//主要销售的展示
+	repeated Reward_Info_ Rewards = 7;//商品信息
 }
 
 //限购商店数据 wjl 20200302
 message Limit_Shop_Info_{
 	optional int32 Type = 1;//类型 1:每日限购 2:每周限购 3:每月限购
 	optional int32 ID = 2;
-	repeated Limit_ShopItem_Info_ ItemInfo = 3;//商品信息
+	optional int64 LastTime = 3; //剩余时间
+	repeated Limit_ShopItem_Info_ ItemInfo = 4;//商品信息
 }
 
 // 更新活动静态数据
