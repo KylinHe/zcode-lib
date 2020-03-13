@@ -1,15 +1,16 @@
 package sol
 
 import (
-"sync"
-"os"
-"time"
-"github.com/KylinHe/zcode-lib/def"
-"github.com/KylinHe/zcode-lib/aliens/common/tools"
-"strings"
-"io"
-"encoding/json"
-"bufio"
+	"bufio"
+	"encoding/json"
+	"github.com/KylinHe/zcode-lib/aliens/common/tools"
+	"github.com/KylinHe/zcode-lib/aliens/log"
+	"github.com/KylinHe/zcode-lib/def"
+	"io"
+	"os"
+	"strings"
+	"sync"
+	"time"
 )
 
 // 日志类型
@@ -42,6 +43,7 @@ type LogDB struct {
 type LogManager struct {
 	sync.RWMutex
 	channel chan interface{}
+	isChanClose bool //通道是否已经关闭
 }
 
 var logMgr *LogManager
@@ -65,19 +67,22 @@ func (l *LogManager) init() {
 
 func (l *LogManager) openChan() {
 	if l.channel == nil {
-		l.channel = make(chan interface{}, 10)
+		l.channel = make(chan interface{}, 1000)
 	}
+	l.isChanClose = false
 	go func() {
 		for {
-			log, ok := <-l.channel
+			logChan, ok := <-l.channel
 			if !ok {
+				l.channel = nil
 				break
 			}
-			logDB := log.(LogDB)
+			logDB := logChan.(LogDB)
 			date := time.Now().Format("20060102")
 			fileName := "log/" + logDB.LogName + "-" + date + ".json"
 			file, err := os.OpenFile(fileName, os.O_CREATE|os.O_WRONLY, 0777)
 			if err != nil {
+				log.Debug( ">>>> log wirte err >>> ", err.Error() )
 				continue
 			}
 			n, _ := file.Seek(0, os.SEEK_END)
@@ -85,7 +90,12 @@ func (l *LogManager) openChan() {
 			file.WriteAt(js, n)
 			file.Close()
 		}
-		close(l.channel)
+		if l.isChanClose == false && l.channel != nil {
+			l.isChanClose = true
+			close(l.channel)
+			return
+		}
+
 	}()
 }
 
@@ -93,7 +103,9 @@ func (l *LogManager) openChan() {
 func (l *LogManager) Write(opType int32, args ...interface{}) {
 	l.Lock()
 	defer l.Unlock()
-
+	if l.isChanClose == true || l.channel == nil{
+		l.openChan()
+	}
 	t := time.Now().Format("2006-01-02 15:04:05")
 	log := LogDB{}
 	switch opType {
