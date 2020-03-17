@@ -186,6 +186,25 @@ func (mgr *RankManager)GetUserRank( rankKey string, uid int64 )*RankInfo{
 	return &RankInfo{ Uid:uid, Rank:int32(rank+1), Value:value}
 }
 
+// 获取指定排名区间排行数据( wjl 20200317 )
+func (mgr *RankManager) GetRankByRangeEx(rankKey string,begin int32,end int32) []RankInfo {
+	mgr.Lock()
+	defer mgr.Unlock()
+
+	mgr.assert()
+	var infos []RankInfo
+	ranks := mgr.redisClient.ZRevRangeWithScore(rankKey,begin,end)
+	for _, r := range ranks {
+		begin += 1//默认从 0 开始
+		info := RankInfo{}
+		info.Value = r.Score
+		info.Rank = begin
+		info.Info = r.Member
+		infos = append( infos, info )
+	}
+	return infos
+}
+
 // 获取指定排名区间排行数据
 func (mgr *RankManager) GetRankByRange(rankKey string,begin int32,end int32) []RankInfo {
 	mgr.Lock()
@@ -198,6 +217,7 @@ func (mgr *RankManager) GetRankByRange(rankKey string,begin int32,end int32) []R
 		begin += 1//默认从 0 开始
 		info := RankInfo{}
 		//如果为竞技场排行榜，则先不赋值 id ，先把竞技场详情信息的json 字符串赋值 ，然后通过后面解析 获取Uid
+
 		if rankKey == REDIS_RANK_ARENA{
 			info.Info = r.Member
 		}else{

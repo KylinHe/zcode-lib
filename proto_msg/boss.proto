@@ -75,7 +75,7 @@ message Resp_Hit_Boss_ {
 // 请求 获取世界boss排名
 message Req_Get_BossRank_ {
 	optional int64 UserID = 1;
-	optional int32 UserLv = 2;	// （对应boss等级的条件，不改字段名了，现为最大通关数）
+	optional int32 BossLv = 2;	//(对应boss等级的条件)
 }
 
 // 响应 获取世界boss排名
