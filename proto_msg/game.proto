@@ -417,6 +417,7 @@ message Resp_PlayerData_Base_ {
 	optional int32 SpendDiamond = 76;   // 累计消费钻石数
 	optional int32 LeaderExt = 77;	// 领导力【额外】
 	optional int32 VitBuyTimesLimit = 78;	// 体力购买次数
+	optional int64 RiskFund = 79;//冒险基金( -1: 没有买过冒险基金, > 0：有冒险基金了哦 )
 }
 
 //回复 用户英雄信息

@@ -88,10 +88,10 @@ const (
 	ReqPrizeWheel		 int32 = 5107  // 请求 大转盘
 	ReqContinueChargeRec int32 = 5111  // 请求 连续充值奖励领取
 	ReqReceiveRedPacket  int32 = 5114  // 请求领取红包
-	ReqGetRedPacket  	 int32 = 5115	// 请求 获取红包
-	ReqLimitShopInfo	 int32 = 5120	// 请求限购商店信息 wjl 20200302
-	ReqLimitShopFree	 int32 = 5121   //请求限购商店免费领取 wjl 20200306
-
+	ReqGetRedPacket  	 int32 = 5115  // 请求 获取红包
+	ReqLimitShopInfo	 int32 = 5120  // 请求限购商店信息 wjl 20200302
+	ReqLimitShopFree	 int32 = 5121  //请求限购商店免费领取 wjl 20200306
+	ReqRiskFundGet		 int32 = 5125  //请求冒险基金领取
 	
 	ReqChapterInfo       int32 = 6000 //请求关卡静态信息
 	ReqChapterNodePickUp int32 = 6005 //请求关卡奖励拾取
@@ -306,7 +306,8 @@ const (
 	RespGetRedPacket			int32 = 15115	// 请求 获取红包
 	RespLimitShopInfo			int32 = 15120 //响应限购商店信息 wjl 20200302
 	RespLimitShopBuy			int32 = 15121 //响应限购商店购买
-		
+	RespRiskFundGet				int32 = 15125 //响应冒险基金领取
+
 	RespChapterInfo       		int32 = 16000 //回复关卡静态数据
 	RespChapterNodePickUp 		int32 = 16005 //回复章节关卡拾取
 	RespChapterBattleSet 		int32 = 16010	// 响应 关卡数据设置

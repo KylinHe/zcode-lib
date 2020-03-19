@@ -110,6 +110,8 @@ message C2GS{//请求类型消息
 	optional Req_LimitShop_Info_ Req_LimitShop_Info = 5120;//请求限购商店信息
 	optional Req_LimitShop_Free_ Req_LimitShop_Free = 5121;//请求限购商店免费领取
 
+	optional Req_RiskFund_Get_	Req_RiskFund_Get = 5125;//请求冒险基金领取
+
 //战斗相关
     optional Req_ChapterInfo_ Req_ChapterInfo = 6000; //客户端请求关卡数据
     optional Req_ChapterNode_PickUp_ Req_ChapterNode_PickUp = 6005;//客户请求拾取关卡奖励
@@ -345,6 +347,9 @@ message GS2C{//响应类型消息
     optional Resp_Get_RedPacket_ Resp_Get_RedPacket = 15115;
 	optional Resp_LimitShop_Info_ Resp_LimitShop_Info = 15120;//响应限购商店信息
 	optional Resp_LimitShop_Buy_ Resp_LimitShop_Buy = 15121;//响应限购商店购买
+
+	optional Resp_RiskFund_Get_	Resp_RiskFund_Get = 15125;//相应冒险基金领取
+
 //战斗相关
     optional Resp_ChapterInfo_ Resp_ChapterInfo = 16000; //响应关卡数据请求
     optional Resp_ChapterNode_PickUp_ Resp_ChapterNode_PickUp = 16005;//响应关卡拾取

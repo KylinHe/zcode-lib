@@ -334,3 +334,14 @@ message Resp_LimitShop_Buy_{
 	optional int32 Times= 3;//目前已购买了几次
 	repeated Reward_Info_ Rewards = 4;  // 奖励
 }
+
+//请求冒险基金领取
+message Req_RiskFund_Get_{
+	optional int32 ID = 1;//需要领取奖励的ID号
+}
+
+//响应冒险基金领取
+message Resp_RiskFund_Get_{
+	optional int64 RiskFund = 1;//玩家当前冒险基金的状态
+	repeated Reward_Info_ Rewards = 2;// 奖励
+}
