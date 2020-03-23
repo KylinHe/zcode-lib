@@ -119,6 +119,8 @@ message Resp_PlayerData_Activity_ {
     repeated int32 NewContinueChargeReward = 35;   // 新手7日充值奖励领取
     repeated int32 FixedDateSignState = 36; // 固定日期签到
     repeated int32 ExchangeItem = 37;   // 兑换道具数据 e.g. 兑换道具id * 1000 + 已兑换的次数
+	optional int64 RiskFund = 38;//冒险基金( 0: 没有买过冒险基金, -1 或者 0：有冒险基金了哦 )
+
 }
 
 // 更新 玩家活动数据

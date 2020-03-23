@@ -292,6 +292,7 @@ message Resp_Client_Login_ {
     optional int32 Result = 3;      //结果    0：成功 1：失败 2：封号 3：更新版本 4:服务器维护
     optional string ErrMsg = 4;     //错误信息
 	optional int64 SevTime = 5;	// 服务器时间
+	optional int32 A = 6;		//消息包随机种子
 }
 
 // 请求 重置用户头像
@@ -417,7 +418,6 @@ message Resp_PlayerData_Base_ {
 	optional int32 SpendDiamond = 76;   // 累计消费钻石数
 	optional int32 LeaderExt = 77;	// 领导力【额外】
 	optional int32 VitBuyTimesLimit = 78;	// 体力购买次数
-	optional int64 RiskFund = 79;//冒险基金( -1: 没有买过冒险基金, > 0：有冒险基金了哦 )
 }
 
 //回复 用户英雄信息

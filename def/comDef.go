@@ -47,6 +47,8 @@ const (
 	RewardPublicHeroClip		   // 公用英雄碎片 22
 	RewardDrawEquip				   // 抽装备 23
 	RewardLimitShop					// 限购商店 24
+	RewardRiskFund					// 冒险基金 25
+	RewardLimitGift					// 限时礼包 26
 )
 
 // 货币类型
