@@ -24,7 +24,7 @@ const(
 
 const(
 	MAX_RANK_DEFAULT = 500	// 默认上限
-	MAX_RANK_LEVEL = 50000 //等级排行的数量上限
+	MAX_RANK_LEVEL = 2000 //等级排行的数量上限
 	MAX_RANK_BOSS = 500// boss排行上限
 	MAX_RANK_ARENA = 5000// arena排行上限
 )
@@ -192,6 +192,7 @@ func (mgr *RankManager) GetRankByRangeEx(rankKey string,begin int32,end int32) [
 	defer mgr.Unlock()
 
 	mgr.assert()
+
 	var infos []RankInfo
 	ranks := mgr.redisClient.ZRevRangeWithScore(rankKey,begin,end)
 	for _, r := range ranks {
