@@ -37,6 +37,7 @@ type LogLogin struct {
 	RegTime  int64 `json:"reg"`      // 注册时间
 	Vit      int32 `json:"vit"`      // 体力
 	Platform int32 `json:"platform"` // 登陆平台
+	IP 		string `json:"ip"` //ip地址
 }
 
 type LogLogout struct {

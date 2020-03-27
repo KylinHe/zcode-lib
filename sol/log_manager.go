@@ -138,7 +138,7 @@ func (l *LogManager) Write(opType int32, args ...interface{}) {
 	case LogTypeLogin:
 		log.LogName = "login"
 		data := &def.LogLogin{Time: t, UserID: args[0].(int64), //Name: args[1].(string), 
-			Lv: args[2].(int32), Gold: args[3].(int32), Diamond: args[4].(int32), RegTime: args[5].(int64),Vit:args[6].(int32),Platform:args[7].(int32)}
+			Lv: args[2].(int32), Gold: args[3].(int32), Diamond: args[4].(int32), RegTime: args[5].(int64),Vit:args[6].(int32),Platform:args[7].(int32), IP:args[8].(string) }
 		log.Data = []byte(tools.MarshalObj(data))
 	case LogTypeLogout:
 		log.LogName = "logout"
