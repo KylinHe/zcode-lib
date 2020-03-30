@@ -167,6 +167,7 @@ message Resp_PlayerUpdate_Base_{
 	optional int32 SpendDiamond = 41;   // 累计消费钻石数
 	optional int32 LeaderExt = 42;	// 领导力【额外】
 	optional int32 VitBuyTimesLimit = 43;	// 体力购买次数
+	optional int32 ReelUse = 44; //单场战斗卷轴的使用数量(x*1000+y)【x:基础数量, y:附加数量】
 }
 
 //回复 玩家 英雄更新
@@ -244,6 +245,7 @@ message Resp_Player_LvUp_{
 	optional int32 TalentPoint = 14;// 天赋点
 	optional int32 Atk = 15;	// 攻
 	optional int32 Def = 16;	// 防
+	optional int32 ReelUse = 17; //单场战斗卷轴的使用数量(x*1000+y)【x:基础数量, y:附加数量】
 }
 
 // 请求 更新红点标识
@@ -418,6 +420,7 @@ message Resp_PlayerData_Base_ {
 	optional int32 SpendDiamond = 76;   // 累计消费钻石数
 	optional int32 LeaderExt = 77;	// 领导力【额外】
 	optional int32 VitBuyTimesLimit = 78;	// 体力购买次数
+	optional int32 ReelUse = 79; //单场战斗卷轴的使用数量(x*1000+y)【x:基础数量, y:附加数量】
 }
 
 //回复 用户英雄信息
