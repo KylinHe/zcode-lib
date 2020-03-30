@@ -14,8 +14,9 @@ const(
 	Mar_Type_Shutdown				// 4 终结连胜（5，>= 10）
 	Mar_Type_Chest3            		// 5 开到品质3宝箱
 	Mar_Type_Chest4					// 6 开到品质4宝箱
-
+	Mar_Type_HeroDraw				// 7 英雄抽卡
 )
+
 const Msg_Max = 1000	// 消息长度
 // 游戏内消息推送
 type GamePush struct {
