@@ -421,6 +421,8 @@ message Resp_PlayerData_Base_ {
 	optional int32 LeaderExt = 77;	// 领导力【额外】
 	optional int32 VitBuyTimesLimit = 78;	// 体力购买次数
 	optional int32 ReelUse = 79; //单场战斗卷轴的使用数量(x*1000+y)【x:基础数量, y:附加数量】
+	optional int32 ReelUseGold = 80;//单场战斗卷轴的使用金钱底数( x * 1000 + num ) num 表示次数上限 超过了这个测试 则 使用钻石
+	optional int32 ReelUserDiamond = 81;//单场战斗卷首使用的钻石底数
 }
 
 //回复 用户英雄信息

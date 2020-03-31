@@ -15,6 +15,7 @@ const(
 	Mar_Type_Chest3            		// 5 开到品质3宝箱
 	Mar_Type_Chest4					// 6 开到品质4宝箱
 	Mar_Type_HeroDraw				// 7 英雄抽卡
+	Mar_Type_HeroDrawLimit			// 8 英雄限时抽卡
 )
 
 const Msg_Max = 1000	// 消息长度
