@@ -233,6 +233,7 @@ const ( //日志操作
 	LogOpChat 			   // 聊天 37
 	LogOpNewFirstCharge	   // 新首充奖励 38
 	LogOpRedPack		   // 红包 39
+	LogOpReelUse		   // 卷轴使用 40
 )
 
 // 装备日志类型
