@@ -259,6 +259,13 @@ type LogClientDot struct {
 	Arg2   int32
 }
 
+type LogDrawCard struct {//wjl 20200402 抽卡数据
+	Time string
+	UserID int64
+	Type int32 //抽卡类型
+	Rewards string //奖励内容
+}
+
 type ArgsFcm struct {
 	Token    []string
 	Language []int32

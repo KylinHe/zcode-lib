@@ -32,6 +32,7 @@ const (
 	LogTypeShopBuy	// 商店购买日志
 	LogTypeArenaShop// 竞技场商店
 	LogTypeClientDot // 客户端打点
+	LogTypeDrawCard  //抽卡
 )
 
 type LogDB struct {
@@ -247,6 +248,15 @@ func (l *LogManager) Write(opType int32, args ...interface{}) {
 			ShopID:args[1].(int32),
 			Price:args[2].(float32),
 			CurType:args[3].(int32),
+		}
+		log.Data = []byte(tools.MarshalObj(data))
+	case LogTypeDrawCard:
+		log.LogName = "draw_card"
+		data := &def.LogDrawCard{
+			Time:t,
+			UserID:args[0].(int64),
+			Type:args[1].(int32),
+			Rewards:args[2].(string),
 		}
 		log.Data = []byte(tools.MarshalObj(data))
 	default:
