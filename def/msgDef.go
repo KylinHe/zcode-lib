@@ -300,7 +300,8 @@ const (
 	RespPrizeWheel	 			int32 = 15107	// 响应 大转盘
 	RespDataActivityUpdate 		int32 = 15108	// 响应
 	RespUpdatePlayerPrivileges	int32 = 15109	// 更新玩家特权
-	RespContinueChargeRec		int32 = 15111;	// 连续充值奖励领取
+	RespContinueCharge			int32 = 15110	// 响应 连续充值
+	RespContinueChargeRec		int32 = 15111	// 连续充值奖励领取
 	RespExchangeItemData		int32 = 15113 // 活动兑换道具
 	RespReceiveRedPacket		int32 = 15114  // 请求领取红包
 	RespGetRedPacket			int32 = 15115	// 请求 获取红包
