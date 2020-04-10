@@ -104,8 +104,7 @@ message Resp_Add_HitTimes_ {
 
 // 请求 奖励信息
 message Req_Boss_RewardInfo_ {
-	optional int64 UserID = 1;
-	optional int32 UserLv = 2;//（对应boss等级的条件，不改字段名了，现为最大通关数）
+	optional int32 BossLv = 1;//boss 的等级
 }
 // 响应 奖励信息
 message Resp_Boss_RewardInfo_ {
