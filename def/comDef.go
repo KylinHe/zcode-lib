@@ -234,6 +234,7 @@ const ( //日志操作
 	LogOpNewFirstCharge	   // 新首充奖励 38
 	LogOpRedPack		   // 红包 39
 	LogOpReelUse		   // 卷轴使用 40
+	LogOpExchange		   // 兑换 41
 )
 
 // 装备日志类型

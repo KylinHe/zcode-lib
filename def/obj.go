@@ -266,6 +266,15 @@ type LogDrawCard struct {//wjl 20200402 抽卡数据
 	Rewards string //奖励内容
 }
 
+type LogOrder struct {//wjl 20200415 订单日志
+	Time string
+	UserID int64
+	ShopID int32
+	Order string //平台订单信息
+	Amount float64 //金额
+	Channel string //渠道信息
+}
+
 type ArgsFcm struct {
 	Token    []string
 	Language []int32
