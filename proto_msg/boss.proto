@@ -50,7 +50,7 @@ message Resp_Boss_Info_{
 	optional int64 HitBossDuration = 12;	// 打boss的战斗时长
 	optional int32 BossLv = 13;//世界boss 等级,用于查询排行榜用
 	optional int64 SrvTime = 14;//世界boss 的世界时间戳, 用于精准显示世界boss的开启情况(多个game server 时间有偏差)
-	optional int32 TermHeroJob = 15;//世界boss 对 玩家挑战英雄阵容的职业要求
+	repeated int32 TermHeroJob = 15;//世界boss 对 玩家挑战英雄阵容的职业要求
 	
 }
 
