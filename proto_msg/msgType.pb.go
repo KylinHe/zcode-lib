@@ -156,8 +156,8 @@ type C2GS struct {
 	Req_Hit_Boss     *Req_Hit_Boss_     `protobuf:"bytes,8002,opt,name=Req_Hit_Boss" json:"Req_Hit_Boss,omitempty"`
 	Req_Get_BossRank *Req_Get_BossRank_ `protobuf:"bytes,8003,opt,name=Req_Get_BossRank" json:"Req_Get_BossRank,omitempty"`
 	Req_Add_HitTimes *Req_Add_HitTimes_ `protobuf:"bytes,8004,opt,name=Req_Add_HitTimes" json:"Req_Add_HitTimes,omitempty"`
-	// optional Req_BossInfo_Update_ Req_BossInfo_Update = 8005;// 请求 更新boss信息
-	//    optional Req_Boss_Battle_ Req_Boss_Battle = 8002;//客户端请求世界boss 进入战斗
+	// 	optional Req_BossInfo_Update_ Req_BossInfo_Update = 8005;// 请求 更新boss信息
+	// 	optional Req_Boss_Battle_ Req_Boss_Battle = 8002;//客户端请求世界boss 进入战斗
 	Req_Boss_RewardInfo   *Req_Boss_RewardInfo_   `protobuf:"bytes,8006,opt,name=Req_Boss_RewardInfo" json:"Req_Boss_RewardInfo,omitempty"`
 	Req_Boss_Battle_Begin *Req_Boss_Battle_Begin_ `protobuf:"bytes,8007,opt,name=Req_Boss_Battle_Begin" json:"Req_Boss_Battle_Begin,omitempty"`
 	// 竞技场

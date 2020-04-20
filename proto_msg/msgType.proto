@@ -174,11 +174,11 @@ message C2GS{//请求类型消息
     optional Req_Hit_Boss_ Req_Hit_Boss = 8002; //请求 攻击boss
     optional Req_Get_BossRank_ Req_Get_BossRank = 8003; // 请求 获取boss排行
     optional Req_Add_HitTimes_ Req_Add_HitTimes = 8004; // 请求 增加攻击次数
-    // optional Req_BossInfo_Update_ Req_BossInfo_Update = 8005;// 请求 更新boss信息
-//    optional Req_Boss_Battle_ Req_Boss_Battle = 8002;//客户端请求世界boss 进入战斗
+//	optional Req_BossInfo_Update_ Req_BossInfo_Update = 8005;// 请求 更新boss信息
+//	optional Req_Boss_Battle_ Req_Boss_Battle = 8002;//客户端请求世界boss 进入战斗
     optional Req_Boss_RewardInfo_ Req_Boss_RewardInfo = 8006;   // 请求 boss奖励信息
     optional Req_Boss_Battle_Begin_ Req_Boss_Battle_Begin = 8007; // 请求 沙盘消除结束，开始打boss
-
+	
 //竞技场
 	optional Req_Arena_Info_	Req_Arena_Info = 8501;//客户端请求竞技场数据
 	optional Req_Arena_Match_	Req_Arena_Match = 8502;//客户端请求竞技场匹配

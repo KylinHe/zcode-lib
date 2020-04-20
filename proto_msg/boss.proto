@@ -106,8 +106,10 @@ message Resp_Add_HitTimes_ {
 
 // 请求 奖励信息
 message Req_Boss_RewardInfo_ {
-	optional int32 BossLv = 1;//boss 的等级
+	optional int32 BossLv = 1;//boss 的等级( 1~8级 )
+	optional int32 BossFamlyID = 2;//boss 的怪物家族ID
 }
+
 // 响应 奖励信息
 message Resp_Boss_RewardInfo_ {
 	optional int64 UserID = 1;
