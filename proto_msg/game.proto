@@ -423,6 +423,7 @@ message Resp_PlayerData_Base_ {
 	optional int32 ReelUse = 79; //单场战斗卷轴的使用数量(x*1000+y)【x:基础数量, y:附加数量】
 	optional int32 ReelUseGold = 80;//单场战斗卷轴的使用金钱底数( x * 1000 + num ) num 表示次数上限 超过了这个测试 则 使用钻石
 	optional int32 ReelUserDiamond = 81;//单场战斗卷首使用的钻石底数
+	optional string IdCard = 82;//身份证( 实名认证用 )
 }
 
 //回复 用户英雄信息
@@ -1112,6 +1113,19 @@ message Resp_Data_Push_ {
 	optional string Data = 1;
 }
 
+//请求/响应 实名认证
+message Req_Real_Auth_{
+	optional string Name = 1;//名字
+	optional string ID = 2;//身份证
+}
+
+message Resp_Real_Auth_{
+	optional int32 Ret = 1;// 0x00:失败 0x01:成功
+	optional string Name = 2;//名字
+	optional string ID = 3;//身份证
+}
+
+//响应实名认证
 // 请求 邀请码
 message Req_Invite_ {
 	optional int64 UserID = 1;	// 服务端专用

@@ -368,6 +368,8 @@ It has these top-level messages:
 	Resp_ChargeRewardInfo_
 	Req_Data_Push_
 	Resp_Data_Push_
+	Req_Real_Auth_
+	Resp_Real_Auth_
 	Req_Invite_
 	Resp_Invite_
 	Req_Rec_FamilyExp_

@@ -19,10 +19,12 @@ message C2GS{//请求类型消息
     optional Req_Sys_Friend_Apply_ Req_Sys_Friend_Apply = 150;//服务器内推送... 好友添加
     optional int32 Req_Conn_Center = 151;   // 连接center server请求
 	optional int32 Req_Conn_Battle = 152;//连接 battle server 请求
-
+	
 //基础
 	optional Req_Gift_	Req_Gift = 232; //请求领取礼包
-    optional Req_HeartBeat_ Req_HeartBeat = 233;    // 请求 心跳
+    optional Req_HeartBeat_ Req_HeartBeat = 233; // 请求心跳
+
+
     optional Req_Get_Server_Time_ Req_Get_Server_Time =  1001;  // 请求 获取服务器时间
     optional Req_Client_Login_ Req_Client_Login = 1000; //客户端请求登录
     optional Req_Set_Name_ Req_Set_Name = 1010; //客户端请求设置昵称
@@ -43,6 +45,7 @@ message C2GS{//请求类型消息
     optional Req_UserRank_ Req_UserRank = 1250; // 请求 排行榜
     optional Req_Data_Push_ Req_Data_Push = 1251;
 
+	optional Req_Real_Auth_ Req_Real_Auth = 1260; //请求实名认证
 //vip
 	optional Req_Vip_Info_	Req_Vip_Info = 1280; //请求 vip信息
 	optional Req_Vip_Receive_ Req_Vip_Receive = 1281; //请求 vip礼品领取
@@ -242,6 +245,7 @@ message GS2C{//响应类型消息
 //通用
 	optional Resp_Gift_	Resp_Gift = 1232; //响应领取礼包
     optional Resp_HeartBeat_ Resp_HeartBeat = 1233;    // 响应 心跳
+
     optional Resp_Get_Server_Time_ Resp_Get_Server_Time = 1001;// 响应 服务器时间
     optional Resp_PlayerUpdate_Base_ Resp_PlayerUpdate_Base = 10001;//回复 玩家 基础更新
     optional Resp_PlayerUpdate_Hero_ Resp_PlayerUpdate_Hero = 10002;//回复 玩家 英雄更新
@@ -279,6 +283,7 @@ message GS2C{//响应类型消息
     optional Resp_UserRank_ Resp_UserRank = 11250; // 响应 排行榜
     optional Resp_Data_Push_ Resp_Data_Push = 11251;//
 
+	optional Resp_Real_Auth_ Resp_Real_Auth = 11260; //响应实名认证
 //vip
 	optional Resp_Vip_Info_	Resp_Vip_Info = 11280; //响应 vip信息
 	optional Resp_Vip_Receive_ Resp_Vip_Receive = 11281; //响应 vip礼品领取
