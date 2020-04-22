@@ -181,6 +181,7 @@ message C2GS{//请求类型消息
 //	optional Req_Boss_Battle_ Req_Boss_Battle = 8002;//客户端请求世界boss 进入战斗
     optional Req_Boss_RewardInfo_ Req_Boss_RewardInfo = 8006;   // 请求 boss奖励信息
     optional Req_Boss_Battle_Begin_ Req_Boss_Battle_Begin = 8007; // 请求 沙盘消除结束，开始打boss
+	optional Req_Formation_Boss_ Req_Formation_Boss_ = 8010;// 请求设置 挑战世界boss阵容
 	
 //竞技场
 	optional Req_Arena_Info_	Req_Arena_Info = 8501;//客户端请求竞技场数据
@@ -413,10 +414,11 @@ message GS2C{//响应类型消息
     optional Resp_Get_BossRank_ Resp_Get_BossRank = 18003; // 响应 获取boss排行
     optional Resp_Add_HitTimes_ Resp_Add_HitTimes = 18004; // 响应 增加攻击次数
     optional Resp_BossInfo_Update_ Resp_BossInfo_Update = 18005;// 响应 更新boss信息
-//    optional Resp_Boss_Battle_ Resp_Boss_Battle = 18002;//客户端请求世界boss 进入战斗
+//  optional Resp_Boss_Battle_ Resp_Boss_Battle = 18002;//客户端请求世界boss 进入战斗
     optional Resp_Boss_RewardInfo_ Resp_Boss_RewardInfo = 18006;// 响应 boss奖励信息
     optional Resp_Boss_PlayerInfo_ Resp_Boss_PlayerInfo = 18007;// 响应 boss玩家信息
     optional Resp_Notice_Boss_Battle_TimeOut_ Resp_Notice_Boss_Battle_TimeOut = 18008;   // 响应 通知客户端攻击boss超时，该结束了
+	optional Resp_Formation_Boss_ Resp_Formation_Boss_ = 18010;//响应设置 挑战世界boss阵容
 //竞技场
 	optional Resp_Arena_Info_ Resp_Arena_Info = 18501;//响应 客户端请求竞技场数据
 	optional Resp_Arena_Match_ Resp_Arena_Match = 18502;//响应 客户端请求竞技场匹配

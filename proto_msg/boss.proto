@@ -42,7 +42,7 @@ message Resp_Boss_Info_{
 	optional Boss_Info_ Bosses = 4;//Boss数据
 	repeated Damage_Info_ DamageInfo = 5;	// 伤害数据
 	optional TableInfo_ TableInfo = 6;//沙盘数据
-    optional int32 Step = 7;   // 消除步数
+	optional int32 Step = 7;   // 消除步数
 	optional PlayerBoss_Info_ PlayerInfo = 8;// 玩家数据
 	optional int32 SceneID = 9;	// 场景ID
 	optional bool CanHit = 10;	// 是否可攻打
@@ -51,7 +51,8 @@ message Resp_Boss_Info_{
 	optional int32 BossLv = 13;//世界boss 等级,用于查询排行榜用
 	optional int64 SrvTime = 14;//世界boss 的世界时间戳, 用于精准显示世界boss的开启情况(多个game server 时间有偏差)
 	repeated int32 TermHeroJob = 15;//世界boss 对 玩家挑战英雄阵容的职业要求
-	
+	repeated int32 HeroID = 16;//世界boss 的 上阵家族ID
+	optional int32 TableID = 17;//沙盘ID
 }
 
 // 请求 攻击boss
@@ -148,6 +149,17 @@ message Req_Boss_Battle_Begin_ {
 // 响应 通知客户端攻击boss超时，该结束了
 message Resp_Notice_Boss_Battle_TimeOut_ {
 	repeated int64 UserIDs = 1;
+}
+
+// 请求 设置世界Boss 阵容
+message Req_Formation_Boss_{
+	repeated int32 HeroID = 1;//挑战的 英雄家族ID
+}
+
+// 响应 设置世界Boss 阵容
+message Resp_Formation_Boss_{
+	repeated int32 HeroID = 1;
+	optional TableInfo_ TableInfo = 2;//沙盘数据
 }
 
 // 伤害列表

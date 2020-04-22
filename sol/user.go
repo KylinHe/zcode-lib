@@ -113,7 +113,7 @@ type User struct {
 	HitBossTimes      int32 `json:"f8"`
 	HitBossShareTimes int32 `json:"f9"`
 	HitBossDamage	  int64 `json:"fa"` //wjl 20200226 新增 世界boss的伤害值
-	
+	HitBossHero		 []int32 `json:"hbh"` //wjl 20200422 新增 世界boss 的 怪物家族上阵阵容
 	// 小游戏
 	MiniGame string `json:"f0"` // 小游戏副本
 

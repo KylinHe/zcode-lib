@@ -166,6 +166,8 @@ It has these top-level messages:
 	Resp_Boss_PlayerInfo_
 	Req_Boss_Battle_Begin_
 	Resp_Notice_Boss_Battle_TimeOut_
+	Req_Formation_Boss_
+	Resp_Formation_Boss_
 	Damage_Info_
 	Chat_Info_
 	Marquee_Info_
