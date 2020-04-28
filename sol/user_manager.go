@@ -288,6 +288,13 @@ func (mgr *UserManager)GetUserByUid( uid int64 )*User{
 	return mgr.getUserByUid(uid)
 }
 
+// 删除用户数据 -- BY user
+func( mgr *UserManager)RemoveUser( user *User ){
+	mgr.Lock()
+	defer mgr.Unlock()
+	mgr.redisDel( user )
+}
+
 func (mgr *UserManager) getUserByUid(uid int64) *User {
 	if mgr.redisClient == nil {
 		return nil
@@ -406,6 +413,19 @@ func (mgr *UserManager)redisSave( user *User ){
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 	mgr.redisClient.SetExpire( REDIS_USER + strUid, mgr.expireTime ) //1s就过期
 	mgr.redisClient.SetExpire( REDIS_ACC + user.Account, mgr.expireTime ) //1s就过期
+}
+
+//删除用户数据
+func( mgr *UserManager)redisDel( user *User ){
+	if mgr.redisClient == nil{
+		return
+	}
+	if user == nil{
+		return
+	}
+	strUid := strconv.FormatInt( user.Uid, 10 )
+	mgr.redisClient.DelData( REDIS_USER + strUid )
+	mgr.redisClient.DelData( REDIS_ACC + user.Account )
 }
 
 //获取用户数据
