@@ -168,6 +168,8 @@ It has these top-level messages:
 	Resp_Notice_Boss_Battle_TimeOut_
 	Req_Formation_Boss_
 	Resp_Formation_Boss_
+	Req_Boss_BufferUp_
+	Resp_Boss_BufferUp_
 	Damage_Info_
 	Chat_Info_
 	Marquee_Info_

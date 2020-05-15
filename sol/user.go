@@ -114,6 +114,9 @@ type User struct {
 	HitBossShareTimes int32 `json:"f9"`
 	HitBossDamage	  int64 `json:"fa"` //wjl 20200226 新增 世界boss的伤害值
 	HitBossHero		 []int32 `json:"hbh"` //wjl 20200422 新增 世界boss 的 怪物家族上阵阵容
+	HitBossBuffer	[]int32 `json:"hbb"` //wjl 20200514 新增 世界boss 的 buffer
+	HitBossBufferEndT int64 `json:"hbbt"` //wjl 20200514 新增 世界boss buffer 的结束时间
+	HitBossBufferRefresh int32 `json:"hbbr"` //wjl 20200514 新增 世界boss buffer 的刷新次数
 	// 小游戏
 	MiniGame string `json:"f0"` // 小游戏副本
 

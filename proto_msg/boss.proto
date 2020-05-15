@@ -53,6 +53,9 @@ message Resp_Boss_Info_{
 	repeated int32 TermHeroJob = 15;//世界boss 对 玩家挑战英雄阵容的职业要求
 	repeated int32 HeroID = 16;//世界boss 的 上阵家族ID
 	optional int32 TableID = 17;//沙盘ID
+	optional int32 BuffreRefresh = 18;//buffer 的可刷新次数
+	repeated int32 BufferID = 19;//buffer 的 ID + 等级( id * 1000 + lv )
+	
 }
 
 // 请求 攻击boss
@@ -160,6 +163,17 @@ message Req_Formation_Boss_{
 message Resp_Formation_Boss_{
 	repeated int32 HeroID = 1;
 	optional TableInfo_ TableInfo = 2;//沙盘数据
+}
+
+// 请求 世界boss buffer 升级
+message Req_Boss_BufferUp_{
+	
+}
+
+// 响应 世界boss buffer 升级
+message Resp_Boss_BufferUp_{
+	optional int32 BuffreRefresh = 1;//buffer 的可刷新次数
+	repeated int32 BufferID = 2;//buffer 的 ID + 等级( id * 1000 + lv )
 }
 
 // 伤害列表
