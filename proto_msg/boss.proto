@@ -167,7 +167,7 @@ message Resp_Formation_Boss_{
 
 // 请求 世界boss buffer 升级
 message Req_Boss_BufferUp_{
-	
+	optional int32 OpType = 1;//操作类型 0x00:免费 0x01:使用道具
 }
 
 // 响应 世界boss buffer 升级
