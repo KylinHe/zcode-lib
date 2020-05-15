@@ -156,6 +156,8 @@ const (
 	ReqBossRewardInfo int32 = 8006	// 请求 boss奖励信息
 	ReqBossBattleBegin int32 = 8007	// 请求 boss战斗开始
 	ReqFormationBoss  int32 = 8010 //请求 设置世界boss 阵容
+	ReqBossBufferUp int32 = 8011 //请求世界boss buffer 升级
+	
 	//竞技场
 	ReqArenaInfo  int32 = 8501; //客户端请求竞技场数据
 	ReqArenaMatch int32 = 8502; //客户端请求竞技场匹配
@@ -368,6 +370,7 @@ const (
 	RespBossPlayerInfo int32 = 18007	// 响应 boss玩家信息
 	RespNoticeBossBattleTimeOut int32 = 18008	// 响应 通知客户端攻击boss超时，该结束了
 	RespFormationBoss  int32 = 18010 //响应 设置世界boss 阵容
+	RespBossBufferUp int32 = 18011 //响应世界boss buffer 升级
 	//竞技场
 	RespArenaInfo  int32 = 18501; //客户端请求竞技场数据
 	RespArenaMatch int32 = 18502; //客户端请求竞技场匹配
