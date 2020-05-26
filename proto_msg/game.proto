@@ -1189,14 +1189,9 @@ message SumCharShowInfo {
     optional int32 Cash = 1;
     optional int32 ShowID = 2;
     optional float Scale = 3;
-    optional SumCharge_Show_Pos_ Pos = 4;
+    optional int32 X = 4;
+    optional int32 Y = 5;
 }
-// 请求 累计充值展示信息
-message SumCharge_Show_Pos_ {
-     optional int32 X = 1;
-     optional int32 Y = 2;
-}
-
 // 请求 累计充值展示信息
 message Req_SumCharge_Show_ {
 }
