@@ -196,6 +196,9 @@ const (
 	ReqRecChargeReward int32 = 8803  // 请求 领取充值奖励
 	ReqChargeRewardInfo int32 = 8804	// 请求 充值奖励信息
 	ReqPayShopShow int32 = 8805 // 请求 支付商品展示
+	ReqSumChargeShow int32 = 8806 // 请求累计充值展示
+	ReqAdvertUp int32 = 8807 // 请求加速获取步数
+	ReqAdvertBoxUp int32 = 8808 // 请求加速宝箱
 )
 
 const (

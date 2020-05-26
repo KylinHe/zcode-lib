@@ -222,6 +222,14 @@ message C2GS{//请求类型消息
     optional Req_Receive_ChargeReward_ Req_Receive_ChargeReward = 8803;// 请求 领取月卡
     optional Req_ChargeRewardInfo_ Req_ChargeRewardInfo = 8804; // 请求 获取充值奖励信息
     optional Req_PayShop_Show_ Req_PayShop_Show = 8805;
+// ===================2020年5月29日 更新内容 begin ===============
+// 累计充值展示
+    optional Req_SumCharge_Show_ Req_SumCharge_Show = 8806;
+    //广告加步数
+    optional Req_Advert_up_ Req_Advert_up = 8807;
+    //广告加速宝箱
+    optional Req_Advert_BoxUp_ Req_Advert_BoxUp = 8808;
+// ===================2020年5月29日 更新内容 end  ===============
 // 服务器间通讯 50 - 100
     optional Req_Create_User_ Req_Create_User = 51; // 请求 创建用户
     optional Req_Mail_Update_ Req_Mail_Update = 52; // 请求 邮件更新

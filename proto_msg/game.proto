@@ -1162,3 +1162,45 @@ message Req_Client_Feedback_ {
 	optional string ErrMsg = 1;	// 错误信息
 	optional int32 Type = 2;	// 反馈类型 1：客户端反馈 2：用户反馈
 }
+
+// ============== 广告 ===============
+// 请求 广告加步数
+message Req_Advert_up_ {
+
+}
+// 响应 广告加步数
+message Resp_Advert_up_ {
+    optional int32 AdvertNum = 1;	// 剩余次数
+}
+
+// 请求 广告宝箱加速
+message Req_Advert_BoxUp_ {
+    repeated int32 BoxId = 1;    //加速宝箱ID
+}
+// 响应 广告宝箱加速
+message Resp_Advert_BoxUp_ {
+    repeated Chest_Info_ UP_Chest_Info = 1;	// 响应加速宝箱
+    optional int32 AdvertNum = 2;	// 剩余次数
+}
+
+
+//========= 累计充值 =============
+message SumCharShowInfo {
+    optional int32 Cash = 1;
+    optional int32 ShowID = 2;
+    optional float Scale = 3;
+    optional SumCharge_Show_Pos_ Pos = 4;
+}
+// 请求 累计充值展示信息
+message SumCharge_Show_Pos_ {
+     optional int32 X = 1;
+     optional int32 Y = 2;
+}
+
+// 请求 累计充值展示信息
+message Req_SumCharge_Show_ {
+}
+// 响应 累计充值展示信息
+message Resp_SumCharge_Show_ {
+    repeated SumCharShowInfo Info = 1;	// 展示信息
+}
