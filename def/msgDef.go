@@ -415,4 +415,5 @@ const (
 	RespPayOrderCheck int32 = 18802;	// 响应 订单校验
 	RespRecChargeReward int32 = 18803	// 响应 领取充值奖励
 	RespChargeRewardInfo int32 = 18804	// 响应 充值奖励信息
+	RespSumChargeShowInfo int32 = 18808	// 响应 累计充值展示信息
 )

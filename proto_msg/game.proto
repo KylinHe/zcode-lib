@@ -1195,7 +1195,7 @@ message Resp_Advert_BoxCall_ {
 message SumCharShowInfo_ {
     optional int32 Cash = 1;
     optional int32 ShowID = 2;
-    optional float Scale = 3;
+    optional int32 Scale = 3;
     optional int32 X = 4;
     optional int32 Y = 5;
 }
