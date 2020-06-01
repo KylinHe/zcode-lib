@@ -451,6 +451,7 @@ const (
 	ActNewContinueCharge            // 19 新手连续充值活动
 	ActFixedDateSign				// 20 固定日期签到
 	ActItemExchange					// 21 道具兑换
+	ActSevenSign                    //22 七日签到
 )
 
 // 特权
