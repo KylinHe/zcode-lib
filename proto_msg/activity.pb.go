@@ -382,11 +382,11 @@ It has these top-level messages:
 	Req_HeartBeat_
 	Resp_HeartBeat_
 	Req_Client_Feedback_
-	Req_AdvertUp_
+	Req_Advert_Info_
 	AdvertInfo_
-	Resp_AdvertUp_
-	Req_Advert_BoxCall_
-	Resp_Advert_BoxCall_
+	Resp_Advert_Info_
+	Req_Advert_Up_
+	Resp_Advert_Up_
 	SumCharShowInfo_
 	Req_SumCharge_Show_
 	Resp_SumCharge_Show_

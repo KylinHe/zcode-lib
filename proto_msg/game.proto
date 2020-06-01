@@ -1165,8 +1165,8 @@ message Req_Client_Feedback_ {
 
 // ============== 广告 ===============
 // 请求 广告加步数
-message Req_Advert_up_ {
-    optional int32 type = 1;	// 0 信息 / 1 步数 / 2 体力
+message Req_Advert_Info_ {
+
 }
 
 message AdvertInfo_ {
@@ -1175,19 +1175,19 @@ message AdvertInfo_ {
 }
 
 // 响应 广告加步数
-message Resp_Advert_up_ {
-    repeated AdvertInfo_ AdvertInfo = 1;	// 剩余次数
+message Resp_Advert_Info_ {
+    repeated AdvertInfo_ AdvertInfo = 1;	// 信息
 }
 
-// 请求 广告宝箱加速/召唤
-message Req_Advert_BoxCall_ {
-    optional int32 BoxId = 1;    // 加速宝箱ID /0召唤
+// 请求 广告加速
+message Req_Advert_Up_ {
+    optional int32 Type = 1;    //类型 1 步数 2 体力 3 召唤 4 宝箱
+    optional int32 Id = 2;    //宝箱Id
 }
 // 响应 广告宝箱加速
-message Resp_Advert_BoxCall_ {
-    optional int32 Type = 1; //类型
-    optional int32 Box = 2;	// 响应加速宝箱ID/新的召唤次数
-    optional int32 AdvertNum = 3;	// 剩余次数
+message Resp_Advert_Up_ {
+    optional int32 Aid = 1; //类型 1 步数     2 体力    3 召唤   4 宝箱
+    optional int32 AdvertNum = 2;	// 剩余次数
 }
 
 

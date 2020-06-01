@@ -466,3 +466,11 @@ const (
 	DrawNormal int32 = iota + 1
 	DrawHigh
 )
+
+const (
+	AdvertStep  int32 = iota+1 //步数
+	AdvertVit   // 加体力
+	AdvertCall  // 加召唤
+	AdvertBox   // 加速宝箱
+	AdvertCallId int32 = 11
+)

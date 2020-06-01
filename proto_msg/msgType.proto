@@ -225,10 +225,10 @@ message C2GS{//请求类型消息
 // ===================2020年5月29日 更新内容 begin ===============
 // 累计充值展示
     optional Req_SumCharge_Show_ Req_SumCharge_Show = 8806;
-    //广告加步数
-    optional Req_Advert_up_ Req_Advert_up = 8807;
-    //广告加速宝箱
-    optional Req_Advert_BoxCall_ Req_Advert_BoxCall = 8808;
+//广告次数信息
+    optional Req_Advert_Info_ Req_Advert_Info = 8807;
+//广告加速
+    optional Req_Advert_Up_ Req_Advert_Up = 8808;
 // ===================2020年5月29日 更新内容 end  ===============
 // 服务器间通讯 50 - 100
     optional Req_Create_User_ Req_Create_User = 51; // 请求 创建用户
@@ -478,8 +478,8 @@ message GS2C{//响应类型消息
 
     optional Resp_SumCharge_Show_ Resp_SumCharge_Show = 18808; //累计充值展示
 
-    optional Resp_Advert_up_ Req_Advert_up = 18809; //广告加步数/体力/召唤
+    optional Resp_Advert_Info_ Resp_Advert_Info = 18809; //广告信息
 
-    optional Resp_Advert_BoxCall_ Resp_Advert_BoxCall = 18810; //广告加速宝箱
+    optional Resp_Advert_Up_ Resp_Advert_Up= 18810; //广告加速操作
 
 }

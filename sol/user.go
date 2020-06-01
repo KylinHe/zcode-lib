@@ -137,6 +137,7 @@ type User struct {
 
 	LimitShopID []int32 `json:"k3"` //拥有的限购商店的ID
 	LimitShopTimes [][]int32 `json:"k4"`//限购商店的购买次数
+	Advert   map[int32]int32 `json:i0`
 }
 
 func (u *User) Parse(arrStr []string) {
