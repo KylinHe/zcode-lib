@@ -67,7 +67,7 @@ message Req_Hit_Boss_ {
 	optional int32 Step = 6; // 消除步数
 	optional int64 SumDamage = 7; // 玩家获得总伤害
 	repeated int32 HeroID = 8; //挑战的 英雄ID 列表
-	optional int64 DamageTimeA = 9;	// 伤害   日期除三取余 公式  当日boss 0 点时间戳 + 伤害
+	optional int64 DamageTimeA = 9;	// 伤害
     optional int64 DamageTimeB = 10;
     optional int64 DamageTimeC = 11;
 }
