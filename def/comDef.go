@@ -467,7 +467,7 @@ const (
 	DrawNormal int32 = iota + 1
 	DrawHigh
 )
-
+//广告类型   召唤ID
 const (
 	AdvertStep  int32 = iota+1 //步数
 	AdvertVit   // 加体力
@@ -475,3 +475,5 @@ const (
 	AdvertBox   // 加速宝箱
 	AdvertCallId int32 = 11
 )
+
+const SevenSign = 8  //七日签到长度
