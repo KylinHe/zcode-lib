@@ -1184,7 +1184,7 @@ message Req_Advert_Up_ {
     optional int32 Type = 1;    //类型 1 步数 2 体力 3 召唤 4 宝箱
     optional int32 Id = 2;    //宝箱Id
 }
-// 响应 广告宝箱加速
+// 响应 广告加速
 message Resp_Advert_Up_ {
     optional int32 Aid = 1; //类型 1 步数     2 体力    3 召唤   4 宝箱
     optional int32 AdvertNum = 2;	// 剩余次数

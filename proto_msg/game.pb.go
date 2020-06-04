@@ -6137,7 +6137,7 @@ func (m *Req_Advert_Up_) GetId() int32 {
 	return 0
 }
 
-// 响应 广告宝箱加速
+// 响应 广告加速
 type Resp_Advert_Up_ struct {
 	Aid              *int32 `protobuf:"varint,1,opt,name=Aid" json:"Aid,omitempty"`
 	AdvertNum        *int32 `protobuf:"varint,2,opt,name=AdvertNum" json:"AdvertNum,omitempty"`
