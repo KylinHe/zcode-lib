@@ -478,15 +478,19 @@ const (
 
 const SevenSign = 8  //七日签到长度
 
+//福利枚举
 const (
 	BenefitStep  int32 = iota+1 //步数
 	BenefitVit   // 加体力
 	BenefitCall  // 加召唤
 	BenefitBox   // 加速宝箱
-	BenefitCallId int32 = 11
+
+	BenefitStart int32 = BenefitStep //开始 对应第一个类型
+	BenefitEnd int32 = BenefitBox  //结束 对应最后一个类型
 )
 
 const (
 	BenefitAdvert  int32 = iota //广告
 	BenefitItem   //道具
+	BenefitCallId int32 = 11
 )
