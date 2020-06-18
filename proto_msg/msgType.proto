@@ -222,19 +222,13 @@ message C2GS{//请求类型消息
     optional Req_Receive_ChargeReward_ Req_Receive_ChargeReward = 8803;// 请求 领取月卡
     optional Req_ChargeRewardInfo_ Req_ChargeRewardInfo = 8804; // 请求 获取充值奖励信息
     optional Req_PayShop_Show_ Req_PayShop_Show = 8805;
-// ===================2020年5月29日 更新内容 begin ===============
-// 累计充值展示
-    optional Req_SumCharge_Show_ Req_SumCharge_Show = 8806;
-//广告次数信息
-    optional Req_Advert_Info_ Req_Advert_Info = 8807;
-//广告加速
-    optional Req_Advert_Up_ Req_Advert_Up = 8808;
 
-//信息
-    optional Req_Benefit_Info_ Req_Benefit_Info = 8809;
-//加速
-    optional Req_Benefit_Up_ Req_Benefit_Up = 8810;
-// ===================2020年5月29日 更新内容 end  ===============
+    optional Req_SumCharge_Show_ Req_SumCharge_Show = 8806;// 累计充值展示
+    optional Req_Advert_Info_ Req_Advert_Info = 8807;//广告次数信息
+    optional Req_Advert_Up_ Req_Advert_Up = 8808; //广告加速
+
+    optional Req_Benefit_Info_ Req_Benefit_Info = 8811;//福利信息
+    optional Req_Benefit_Up_ Req_Benefit_Up = 8812;//福利加速
 // 服务器间通讯 50 - 100
     optional Req_Create_User_ Req_Create_User = 51; // 请求 创建用户
     optional Req_Mail_Update_ Req_Mail_Update = 52; // 请求 邮件更新
@@ -482,10 +476,9 @@ message GS2C{//响应类型消息
 
 
     optional Resp_SumCharge_Show_ Resp_SumCharge_Show = 18808; //累计充值展示
-
     optional Resp_Advert_Info_ Resp_Advert_Info = 18809; //广告信息
-
     optional Resp_Advert_Up_ Resp_Advert_Up= 18810; //广告加速操作
+
     optional Resp_Benefit_Info_ Resp_Benefit_Info = 18811; //Benefit信息
     optional Resp_Benefit_Up_ Resp_Benefit_Up= 18812; //Benefit加速操作
 

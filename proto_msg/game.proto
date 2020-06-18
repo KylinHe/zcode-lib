@@ -1191,15 +1191,15 @@ message Resp_Advert_Up_ {
 }
 //====================================
 
-	// 请求 Benefit 信息
+// 请求 Benefit 信息
 message Req_Benefit_Info_ {
 
 }
 
 message BenefitInfo_ {
     optional int32 Type = 1;
-    optional int32 TotalTimes = 2;//总次数
-    optional int32 AdTimes = 3;//广告次数
+    optional int32 TotalTimes = 2;//剩余总次数
+    optional int32 AdTimes = 3;//剩余广告次数
     optional int32 PrivilegeAdd = 4;//特权卡额外剩余次数
     optional int32 AdValue = 5;//广告加成 +1步数
     optional int32 ItemValue = 6;//道具加成 +3步数
@@ -1219,9 +1219,10 @@ message Req_Benefit_Up_ {
 // 响应 加速
 message Resp_Benefit_Up_ {
     optional int32 Aid = 1; //类型 1 步数     2 体力    3 召唤   4 宝箱
-    optional int32 Num = 2;	// 剩余次数
+    optional int32 Num = 2;	// 剩余总次数
     optional int32 CostType = 3;    //1消耗道具 0广告
     optional int32 PrivilegeAdd = 4;//特权卡额外剩余次数
+    optional int32 AdTimes = 5; // 剩余广告次数
 
 }
 
