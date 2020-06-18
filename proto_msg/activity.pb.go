@@ -387,6 +387,11 @@ It has these top-level messages:
 	Resp_Advert_Info_
 	Req_Advert_Up_
 	Resp_Advert_Up_
+	Req_Benefit_Info_
+	BenefitInfo_
+	Resp_Benefit_Info_
+	Req_Benefit_Up_
+	Resp_Benefit_Up_
 	SumCharShowInfo_
 	Req_SumCharge_Show_
 	Resp_SumCharge_Show_
