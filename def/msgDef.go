@@ -199,8 +199,8 @@ const (
 	ReqSumChargeShow int32 = 8806 // 请求累计充值展示
 	ReqAdvertInfo int32 = 8807 // 请求加速信息
 	ReqAdvertUp int32 = 8808 // 请求加速
-	ReqBenefitInfo int32 = 8809 // 请求信息
-	ReqBenefitUp int32 = 8810 // 请求加速
+	ReqBenefitInfo int32 = 8811 // 请求信息
+	ReqBenefitUp int32 = 8812 // 请求加速
 )
 
 const (
