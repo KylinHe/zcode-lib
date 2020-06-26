@@ -102,6 +102,7 @@ type LogChapter struct {
 	ChapterID int32  `json:"cId"`
 	UseReel   bool   `json:"useReel"` // 是否使用卷轴
 	RegTime   int64  `json:"regTime"` // 注册时间
+	ChannelId   int32  `json:"channelId"` // 渠道
 }
 
 type LogCharge struct {
@@ -278,4 +279,15 @@ type LogOrder struct {//wjl 20200415 订单日志
 type ArgsFcm struct {
 	Token    []string
 	Language []int32
+}
+
+//  玩家福利记录
+type LogBenefit struct {
+	Time      string `json:"t"`
+	UserID    int64  `json:"uid"`
+	SurAdTimes int32  `json:"surAdTimes"` //剩余广告几次
+	SurTotalTimes   int32   `json:"surTotalTimes"` //剩余总次数
+	CostType   int32  `json:"costType"` // 消耗类型 0广告/1道具
+	BenefitId     int32 `json:"benefitId"` // 福利类型 1步数2体力3召唤4宝箱
+	ChannelId   int32  `json:"channel"` // 渠道
 }

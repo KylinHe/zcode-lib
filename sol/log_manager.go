@@ -34,6 +34,7 @@ const (
 	LogTypeClientDot // 客户端打点
 	LogTypeDrawCard  //抽卡
 	LogTypeOrder	//订单信息 wjl 20200415
+	LogTypeBenefit   //福利活动（广告/道具）
 )
 
 type LogDB struct {
@@ -155,6 +156,7 @@ func (l *LogManager) Write(opType int32, args ...interface{}) {
 			ChapterID: args[1].(int32),
 			UseReel:   args[2].(bool),
 			RegTime:   args[3].(int64),
+			ChannelId:   args[4].(int32),
 		}
 		log.Data = []byte(tools.MarshalObj(data))
 	case LogTypeFeedback:
@@ -269,6 +271,18 @@ func (l *LogManager) Write(opType int32, args ...interface{}) {
 			Order:args[2].(string),
 			Amount:args[3].(float64),
 			Channel:args[4].(string),
+		}
+		log.Data = []byte(tools.MarshalObj(data))
+	case LogTypeBenefit:
+		log.LogName = "benefit"
+		data := &def.LogBenefit{
+			Time:      t,
+			UserID:    args[0].(int64),
+			SurAdTimes: args[1].(int32),
+			SurTotalTimes:   args[2].(int32),
+			CostType:   args[3].(int32),
+			BenefitId:   args[4].(int32),
+			ChannelId:	args[5].(int32),
 		}
 		log.Data = []byte(tools.MarshalObj(data))
 	default:
