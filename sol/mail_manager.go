@@ -46,7 +46,7 @@ const (
 
 const ExpiryTime = 60*10 //测试
 
-const ExpirtTestTime = 60*5 //测试
+const ExpirtTestTime = 60*6 //测试
 
 type MailFlag struct {
 	ID   int64 //邮件唯一ID
