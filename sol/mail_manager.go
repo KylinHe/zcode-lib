@@ -176,6 +176,9 @@ func (mgr *MailManager) ReadAllDB() {
 				continue
 			}
 
+			if mgr.maxId < mail.ID {
+				mgr.maxId = mail.ID
+			}
 			if time.Now().Unix() < mail.ExpiryTime || mail.ExpiryTime == 0{ //未过期或永久数据可插入
 				if mail.DecUid[0] == 0 { // 表示是全服邮件, 写内存 方便验证 刚上线的玩家是否有新的全服邮件
 					strId := strconv.FormatInt(mail.ID, 10)
@@ -186,10 +189,6 @@ func (mgr *MailManager) ReadAllDB() {
 						strUID := strconv.FormatInt( uid, 10)
 						mgr.redisClient.SAdd( REDIS_MAIL_TARGET+strUID, strId )
 					}
-				}
-
-				if mgr.maxId < mail.ID {
-					mgr.maxId = mail.ID
 				}
 				// todo 191214 处理系统发送未写标识的非群发邮件
 				if mail.SrcUid == 0 && time.Now().Unix() < mail.ExpiryTime && len(mail.DecUid) > 0 && mail.DecUid[0] > 0 {	// 系统发的，未过期，非全服
