@@ -44,9 +44,9 @@ const (
 	MAIL_FLAG_DELET    int32 = 3 //已删除
 )
 
-const ExpiryTime = 7*24*3600
+const ExpiryTime = 60*10 //测试
 
-const ExpirtTestTime = 60*5
+const ExpirtTestTime = 60*5 //测试
 
 type MailFlag struct {
 	ID   int64 //邮件唯一ID
