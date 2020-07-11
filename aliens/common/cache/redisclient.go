@@ -465,6 +465,13 @@ func (this *RedisCacheClient) Send(cmd [][]string) {
 		if len(value) < 3 {
 			continue
 		}
+		if len(value) == 3 {
+			err := conn.Send(value[0],value[1],value[2])
+			if err != nil {
+				log.Error("Send len value == 3: %v", err)
+			}
+			continue
+		}
 		err := conn.Send(value[0],value[1],value[2],value[3])
 		if err != nil {
 			log.Error("Send: %v", err)
