@@ -465,8 +465,8 @@ func (this *RedisCacheClient) Send(cmd [][]string) {
 		if len(value) < 3 {
 			continue
 		}
-		if len(value) == 3 {
-			err := conn.Send(value[0],value[1],value[2])
+		if len(value) == 3 && value[0] == OP_EXPIRE {
+			err := conn.Send(value[0],value[1],value[2]) //批处理 设置过期时间用        20200714
 			if err != nil {
 				log.Error("Send len value == 3: %v", err)
 			}
