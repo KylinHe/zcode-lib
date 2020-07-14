@@ -44,10 +44,6 @@ const (
 	MAIL_FLAG_DELET    int32 = 3 //已删除
 )
 
-const ExpiryTime = 60*10 //测试
-
-const ExpirtTestTime = 60*6 //测试
-
 type MailFlag struct {
 	ID   int64 //邮件唯一ID
 	Flag int32 //邮件操作标识
@@ -176,37 +172,33 @@ func (mgr *MailManager) ReadAllDB() {
 				continue
 			}
 
+			if mail.DecUid[0] == 0 { // 表示是全服邮件, 写内存 方便验证 刚上线的玩家是否有新的全服邮件
+				strId := strconv.FormatInt(mail.ID, 10)
+				mgr.redisClient.SAdd(REDIS_MAIL_GLOBAL, strId)
+			}else {// wjl 20200212 为了解决缓存问题 单独加了个全局缓存 用于记录 有那些目标邮件
+				strId := strconv.FormatInt(mail.ID, 10)
+				for _, uid := range mail.DecUid {
+					strUID := strconv.FormatInt( uid, 10)
+					mgr.redisClient.SAdd( REDIS_MAIL_TARGET+strUID, strId )
+				}
+			}
+
 			if mgr.maxId < mail.ID {
 				mgr.maxId = mail.ID
 			}
-			if time.Now().Unix() < mail.ExpiryTime || mail.ExpiryTime == 0{ //未过期或永久数据可插入
-				if mail.DecUid[0] == 0 { // 表示是全服邮件, 写内存 方便验证 刚上线的玩家是否有新的全服邮件
+			// todo 191214 处理系统发送未写标识的非群发邮件
+			if mail.SrcUid == 0 && time.Now().Unix() < mail.ExpiryTime && len(mail.DecUid) > 0 && mail.DecUid[0] > 0 {	// 系统发的，未过期，非全服
+				mails = append(mails,mail)
+			}
+			jsMail, _ := json.Marshal(mail)
+			if len(jsMail) > 0 { //成功生成 json
+				if mgr.redisClient != nil { //写到 redis 内
 					strId := strconv.FormatInt(mail.ID, 10)
-					mgr.redisClient.SAdd(REDIS_MAIL_GLOBAL, strId)
-				}else {// wjl 20200212 为了解决缓存问题 单独加了个全局缓存 用于记录 有那些目标邮件
-					strId := strconv.FormatInt(mail.ID, 10)
-					for _, uid := range mail.DecUid {
-						strUID := strconv.FormatInt( uid, 10)
-						mgr.redisClient.SAdd( REDIS_MAIL_TARGET+strUID, strId )
-					}
-				}
-				// todo 191214 处理系统发送未写标识的非群发邮件
-				if mail.SrcUid == 0 && time.Now().Unix() < mail.ExpiryTime && len(mail.DecUid) > 0 && mail.DecUid[0] > 0 {	// 系统发的，未过期，非全服
-					mails = append(mails,mail)
-				}
-				jsMail, _ := json.Marshal(mail)
-				if len(jsMail) > 0 { //成功生成 json
-					if mgr.redisClient != nil { //写到 redis 内
-						strId := strconv.FormatInt(mail.ID, 10)
-						redisCmd = append(redisCmd,[]string{cache.OP_H_SET, REDIS_MAIL+strId, REDIS_FILED_MAIL, string(jsMail) })
-						if mail.ExpiryTime !=0{
-							//expiryTime := int(mail.ExpiryTime-time.Now().Unix())
-							redisCmd = append(redisCmd,[]string{cache.OP_EXPIRE, REDIS_MAIL+strId, strconv.Itoa(ExpirtTestTime)}) //非永久邮件设置过期时间
-						}
-						//					mgr.redisClient.HSet(REDIS_MAIL+strId, REDIS_FILED_MAIL, string(jsMail))
-					}
+					redisCmd = append(redisCmd,[]string{cache.OP_H_SET, REDIS_MAIL+strId, REDIS_FILED_MAIL, string(jsMail) })
+					//					mgr.redisClient.HSet(REDIS_MAIL+strId, REDIS_FILED_MAIL, string(jsMail))
 				}
 			}
+
 		}
 		mgr.redisClient.Send(redisCmd)
 		if count < limit {
@@ -247,7 +239,7 @@ func (mgr *MailManager) isExistUserMailFlag(mail *Mail, uid int64, regTime int64
 			}
 		}
 		return true
-//		mgr.updateUserMail(uid, flags)
+		//		mgr.updateUserMail(uid, flags)
 	}
 	return false
 }
@@ -296,10 +288,6 @@ func (mgr *MailManager) NewMail(srcUID int64, decUID string, title string, conte
 	if len(strMail) > 0 {
 		strId := strconv.FormatInt(mail.ID, 10)
 		mgr.redisClient.HSet(REDIS_MAIL+ strId,REDIS_FILED_MAIL, string(strMail))
-		timeGap := expiryTime-time.Now().Unix()
-		if  timeGap >0 {
-			mgr.redisClient.SetExpire(REDIS_MAIL+ strId,int(ExpirtTestTime)) //设置过期时间
-		}
 	}
 
 	// 写数据库
@@ -324,13 +312,12 @@ func (mgr *MailManager) RefreshUserMail(uid int64,regTime int64) []*MailFlag {
 		mailFlags = mgr.getUserMail( uid )
 	}
 	ids := []string{}
-//>>>>>>>>>>>>>>>>>>>>>>>>> 检验全局邮件
+	//>>>>>>>>>>>>>>>>>>>>>>>>> 检验全局邮件
 	ids = mgr.redisClient.SGetAllMember(REDIS_MAIL_GLOBAL)
 	for _, strId := range ids {
 		id, _ := strconv.ParseInt(strId, 10, 64)
 		mail := mgr.getMail(id)
 		if mail == nil {
-			mgr.redisClient.HDel(REDIS_MAIL_GLOBAL,strId) //查无此邮删
 			continue
 		}
 		if mgr.isExistUserMailFlag( mail,uid, regTime, mailFlags ) == true{
@@ -340,13 +327,12 @@ func (mgr *MailManager) RefreshUserMail(uid int64,regTime int64) []*MailFlag {
 			})
 		}
 	}
-//>>>>>>>>>>>>>>>>>>>>>>>> 检验单人邮件
+	//>>>>>>>>>>>>>>>>>>>>>>>> 检验单人邮件
 	ids = mgr.redisClient.SGetAllMember(REDIS_MAIL_TARGET+strUid) //获取关于这个玩家的所有邮件(非全局)
 	for _, strId := range ids {
 		id, _ := strconv.ParseInt(strId, 10, 64)
 		mail := mgr.getMail(id)
 		if mail == nil {
-			mgr.redisClient.HDel(REDIS_MAIL_TARGET+strUid,strId)//查无此邮删
 			continue
 		}
 		if mgr.isExistUserMailFlag( mail,uid, regTime, mailFlags ) == true{
@@ -357,7 +343,7 @@ func (mgr *MailManager) RefreshUserMail(uid int64,regTime int64) []*MailFlag {
 		}
 	}
 
-//>>>>>>
+	//>>>>>>
 	mgr.updateUserMail(uid, mailFlags) //更新回 redis /mysql
 	return mailFlags
 }
@@ -383,9 +369,6 @@ func (mgr *MailManager) getMail(id int64) *Mail {
 
 	strId := strconv.FormatInt(id, 10)
 	strMail := mgr.redisClient.HGet(REDIS_MAIL+strId, REDIS_FILED_MAIL)
-	if strMail == "" {
-		return nil
-	}
 	var mail *Mail
 	err := json.Unmarshal([]byte(strMail), &mail)
 	if err != nil {
@@ -589,6 +572,7 @@ func (mgr *MailManager)getUserMailBySql( uid int64 )[]*MailFlag{
 	}
 
 	mgr.redisClient.HSet(REDIS_MAIL_USER+strUid, REDIS_FILED_MAIL_USER, strFlag) //然后 设置到缓存内
+
 	return mailFlags
 }
 
@@ -630,7 +614,7 @@ func (mgr *MailManager) updateUserMail(uid int64, mailFlags []*MailFlag) {
 	strUid := strconv.FormatInt(uid, 10)
 	oldFlag := mgr.redisClient.HGet(REDIS_MAIL_USER+strUid, REDIS_FILED_MAIL_USER)
 	mgr.redisClient.HSet(REDIS_MAIL_USER+strUid, REDIS_FILED_MAIL_USER, strFlag)
-	mgr.redisClient.SetExpire(REDIS_MAIL_USER+strUid,ExpirtTestTime) //设置过期时间
+
 	if oldFlag != strFlag {	// 做下判断，没改动就不更新数据库了
 		mgr.acceptChannel(MAIL_SQL_CMD_UPDATE, uid, strFlag) // 写数据库
 	}
