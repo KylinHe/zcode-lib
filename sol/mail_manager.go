@@ -174,7 +174,6 @@ func (mgr *MailManager) ReadAllDB() {
 			if len(mail.DecUid ) <= 0 {
 				continue
 			}
-//==================redis 优化1  加载全部邮件  设置 rM静态数据 过期时间=============== 20200714
 			if mgr.maxId < mail.ID {
 				mgr.maxId = mail.ID
 			}
@@ -200,7 +199,7 @@ func (mgr *MailManager) ReadAllDB() {
 						redisCmd = append(redisCmd,[]string{cache.OP_H_SET, REDIS_MAIL+strId, REDIS_FILED_MAIL, string(jsMail) })
 						if mail.ExpiryTime !=0{
 							expiryTime := int(mail.ExpiryTime-time.Now().Unix())+MailExpiryTime //获取过期时间
-							redisCmd = append(redisCmd,[]string{cache.OP_EXPIRE, REDIS_MAIL+strId, strconv.Itoa(expiryTime)}) //非永久邮件设置过期时间
+							redisCmd = append(redisCmd,[]string{cache.OP_EXPIRE, REDIS_MAIL+strId, strconv.Itoa(expiryTime)}) //非永久邮件设置过期时间+冗余保护时间  20200722  优化1
 						}
 						//					mgr.redisClient.HSet(REDIS_MAIL+strId, REDIS_FILED_MAIL, string(jsMail))
 					}
@@ -295,8 +294,7 @@ func (mgr *MailManager) NewMail(srcUID int64, decUID string, title string, conte
 	if len(strMail) > 0 {
 		strId := strconv.FormatInt(mail.ID, 10)
 		mgr.redisClient.HSet(REDIS_MAIL+ strId,REDIS_FILED_MAIL, string(strMail))
-		//==================redis 优化2  新增邮件   设置 rM静态数据 过期时间===============  20200714
-		timeGap := expiryTime-time.Now().Unix()+MailExpiryTime
+		timeGap := expiryTime-time.Now().Unix()+MailExpiryTime//正常过期时间+冗余保护时间 20200722 优化2
 		if  timeGap >0 {
 			mgr.redisClient.SetExpire(REDIS_MAIL+ strId,int(timeGap)) //设置过期时间
 		}
@@ -330,8 +328,7 @@ func (mgr *MailManager) RefreshUserMail(uid int64,regTime int64) []*MailFlag {
 		id, _ := strconv.ParseInt(strId, 10, 64)
 		mail := mgr.getMail(id)
 		if mail == nil {
-			//==================redis 优化3   上线刷新  无 rM静态数据   删除全局邮件中MailId对应数据===============  20200714
-			mgr.redisClient.SRem(REDIS_MAIL_GLOBAL,strId) //查无此邮删
+			mgr.redisClient.SRem(REDIS_MAIL_GLOBAL,strId) //查无此邮删 避免玩家数据错误获取该邮件   优化3
 			continue
 		}
 		if mgr.isExistUserMailFlag( mail,uid, regTime, mailFlags ) == true{
@@ -347,8 +344,7 @@ func (mgr *MailManager) RefreshUserMail(uid int64,regTime int64) []*MailFlag {
 		id, _ := strconv.ParseInt(strId, 10, 64)
 		mail := mgr.getMail(id)
 		if mail == nil {
-			//==================redis 优化4   上线刷新 无 rM静态数据   删除指向性邮件中MailId对应数据===============  20200714
-			mgr.redisClient.SRem(REDIS_MAIL_TARGET+strUid,strId)//查无此邮删
+			mgr.redisClient.SRem(REDIS_MAIL_TARGET+strUid,strId)//查无此邮删 避免玩家数据错误获取该邮件   优化4
 			continue
 		}
 		if mgr.isExistUserMailFlag( mail,uid, regTime, mailFlags ) == true{
@@ -385,7 +381,7 @@ func (mgr *MailManager) getMail(id int64) *Mail {
 
 	strId := strconv.FormatInt(id, 10)
 	strMail := mgr.redisClient.HGet(REDIS_MAIL+strId, REDIS_FILED_MAIL)
-	if strMail == ""{
+	if strMail == ""{ //数据不存在 优化7 20200722
 		return nil
 	}
 	var mail *Mail
@@ -394,7 +390,7 @@ func (mgr *MailManager) getMail(id int64) *Mail {
 		log.Debug(" sol mail get >>> %+v", err)
 		return nil
 	}
-	if mail.ExpiryTime < time.Now().Unix() {
+	if mail.ExpiryTime < time.Now().Unix() { //数据过期  不存在 优化8 20200722   优化7+8后game_server 邮件A  玩家查看邮件A信息/领取等  返回nil 提示玩家邮件邮件未找到  客户端应该有代码倒计时不显示过期邮件- -
 		return nil
 	}
 	return mail
@@ -590,8 +586,7 @@ func (mgr *MailManager)getUserMailBySql( uid int64 )[]*MailFlag{
 		if flag.ID == 0 {
 			continue
 		}
-		//==================redis 优化5  玩家上线获取邮件信息 过滤过期信息  ===============  20200714
-		mail:=mgr.getMail(flag.ID)//过滤以过期邮件
+		mail:=mgr.getMail(flag.ID)//过滤以过期邮件  优化5 20200722
 		if mail == nil  {
 			continue
 		}
@@ -625,8 +620,7 @@ func (mgr *MailManager) getUserMail(uid int64) []*MailFlag {
 		if flag.ID == 0 {//表示是有问题的邮件
 			continue
 		}
-		//==================redis 优化6  玩家上线获取邮件信息 过滤过期信息  ===============  20200714
-		mail:=mgr.getMail(flag.ID) //过滤以过期邮件
+		mail:=mgr.getMail(flag.ID) //过滤以过期邮件 优化6 20200722
 		if mail == nil  {
 			continue
 		}
@@ -645,8 +639,7 @@ func (mgr *MailManager) updateUserMail(uid int64, mailFlags []*MailFlag) {
 	strUid := strconv.FormatInt(uid, 10)
 	oldFlag := mgr.redisClient.HGet(REDIS_MAIL_USER+strUid, REDIS_FILED_MAIL_USER)
 	mgr.redisClient.HSet(REDIS_MAIL_USER+strUid, REDIS_FILED_MAIL_USER, strFlag)
-	//==================redis 优化7  设置玩家个人邮件数据  过期时间为七天 ===============  20200714
-	mgr.redisClient.SetExpire(REDIS_MAIL_USER+strUid,UserExpiryTime) //设置过期时间
+	mgr.redisClient.SetExpire(REDIS_MAIL_USER+strUid,UserExpiryTime) //设置过期时间  优化9 20200722
 	if oldFlag != strFlag {	// 做下判断，没改动就不更新数据库了
 		mgr.acceptChannel(MAIL_SQL_CMD_UPDATE, uid, strFlag) // 写数据库
 	}
