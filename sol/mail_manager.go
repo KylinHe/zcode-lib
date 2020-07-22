@@ -385,13 +385,16 @@ func (mgr *MailManager) getMail(id int64) *Mail {
 
 	strId := strconv.FormatInt(id, 10)
 	strMail := mgr.redisClient.HGet(REDIS_MAIL+strId, REDIS_FILED_MAIL)
-	if strMail == "" {
+	if strMail == ""{
 		return nil
 	}
 	var mail *Mail
 	err := json.Unmarshal([]byte(strMail), &mail)
 	if err != nil {
 		log.Debug(" sol mail get >>> %+v", err)
+		return nil
+	}
+	if mail.ExpiryTime < time.Now().Unix() {
 		return nil
 	}
 	return mail
@@ -592,9 +595,6 @@ func (mgr *MailManager)getUserMailBySql( uid int64 )[]*MailFlag{
 		if mail == nil  {
 			continue
 		}
-		if mail.ExpiryTime < time.Now().Unix() {
-			continue
-		}
 		mailFlags = append(mailFlags, flag) //写入数组
 	}
 
@@ -628,9 +628,6 @@ func (mgr *MailManager) getUserMail(uid int64) []*MailFlag {
 		//==================redis 优化6  玩家上线获取邮件信息 过滤过期信息  ===============  20200714
 		mail:=mgr.getMail(flag.ID) //过滤以过期邮件
 		if mail == nil  {
-			continue
-		}
-		if mail.ExpiryTime < time.Now().Unix() {
 			continue
 		}
 		mailFlags = append(mailFlags, flag) //写入数组
