@@ -328,7 +328,7 @@ func (mgr *MailManager) RefreshUserMail(uid int64,regTime int64) []*MailFlag {
 		id, _ := strconv.ParseInt(strId, 10, 64)
 		mail := mgr.getMail(id)
 		if mail == nil {
-			mgr.redisClient.SRem(REDIS_MAIL_GLOBAL,strId) //查无此邮删 避免玩家数据错误获取该邮件   优化3
+			//mgr.redisClient.SRem(REDIS_MAIL_GLOBAL,strId) //查无此邮删 避免玩家数据错误获取该邮件   优化3
 			continue
 		}
 		if mgr.isExistUserMailFlag( mail,uid, regTime, mailFlags ) == true{
@@ -344,7 +344,7 @@ func (mgr *MailManager) RefreshUserMail(uid int64,regTime int64) []*MailFlag {
 		id, _ := strconv.ParseInt(strId, 10, 64)
 		mail := mgr.getMail(id)
 		if mail == nil {
-			mgr.redisClient.SRem(REDIS_MAIL_TARGET+strUid,strId)//查无此邮删 避免玩家数据错误获取该邮件   优化4
+			//mgr.redisClient.SRem(REDIS_MAIL_TARGET+strUid,strId)//查无此邮删 避免玩家数据错误获取该邮件   优化4
 			continue
 		}
 		if mgr.isExistUserMailFlag( mail,uid, regTime, mailFlags ) == true{
@@ -388,9 +388,6 @@ func (mgr *MailManager) getMail(id int64) *Mail {
 	err := json.Unmarshal([]byte(strMail), &mail)
 	if err != nil {
 		log.Debug(" sol mail get >>> %+v", err)
-		return nil
-	}
-	if mail.ExpiryTime < time.Now().Unix() { //数据过期  不存在 优化8 20200722   优化7+8后game_server 邮件A  玩家查看邮件A信息/领取等  返回nil 提示玩家邮件邮件未找到  客户端应该有代码倒计时不显示过期邮件- -
 		return nil
 	}
 	return mail
