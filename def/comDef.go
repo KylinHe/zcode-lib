@@ -431,13 +431,13 @@ const (
 // 活动
 const (
 	ActLvGift      int32 = iota + 1 // 1 等级礼包
-	ActDinner                       // 2 午晚餐
+	ActDinner                       // 2 午晚餐 每日体力
 	ActFirstCharge                  // 3 首充
 	ActMonCard                      // 4 月卡
 	ActFirstGift                    // 5 新手特惠礼包
 	ActDailyGift                    // 6 每日礼包
 	ActLimitDraw                    // 7 限时抽卡
-	ActCharge                       // 8 累计
+	ActCharge                       // 8 累计充值
 	ActGrowthCapital                // 9 成长基金
 	Act4                            // 10节日兑换
 	ActNewSign                      // 11新手签到
@@ -447,10 +447,10 @@ const (
 	ActNewFirstCharge2              // 15新首充2
 	ActNewFirstCharge3              // 16新首充3
 	ActPrizeWheel                   // 17大转盘
-	ActContinueCharge               // 18 连续充值活动
-	ActNewContinueCharge            // 19 新手连续充值活动
-	ActFixedDateSign				// 20 固定日期签到
-	ActItemExchange					// 21 道具兑换
+	ActContinueCharge               // 18 连续充值活动 天天充值
+	ActNewContinueCharge            // 19 新手连续充值活动 豪华签到
+	ActFixedDateSign				// 20 固定日期签到 节日签到
+	ActItemExchange					// 21 道具兑换 兑换活动
 	ActSevenSign                    //22 七日签到
 )
 

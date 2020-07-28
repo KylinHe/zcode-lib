@@ -171,11 +171,11 @@ func (mgr *MailManager) ReadAllDB() {
 			if mail == nil {
 				continue
 			}
-			if len(mail.DecUid ) <= 0 {
-				continue
-			}
 			if mgr.maxId < mail.ID {
 				mgr.maxId = mail.ID
+			}
+			if len(mail.DecUid ) <= 0 {
+				continue
 			}
 			if time.Now().Unix() < mail.ExpiryTime || mail.ExpiryTime == 0{ //未过期或永久数据可插入
 				if mail.DecUid[0] == 0 { // 表示是全服邮件, 写内存 方便验证 刚上线的玩家是否有新的全服邮件

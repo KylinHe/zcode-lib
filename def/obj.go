@@ -291,3 +291,17 @@ type LogBenefit struct {
 	BenefitId     int32 `json:"benefitId"` // 福利类型 1步数2体力3召唤4宝箱
 	ChannelId   int32  `json:"channel"` // 渠道
 }
+
+//  玩家礼包日志
+type LogGift struct {
+	Time      string `json:"t"`
+	UserID    int64  `json:"uid"`
+	Code string `json:"Code"`//礼包码
+	Tag int `json:"Tag"`//礼包标识
+	TimeBegin int64 `json:"TimeBegin"`//起始时间
+	TimeEnd int64 `json:"TimeEnd"`//结束时间
+	Gift string `json:"Gift"`//内容
+	RecvTop int `json:"RecvTop"`//领取数量上限
+	RecvNum int `json:"RecvNum"`//当前领取数量
+	RegTime int64 `json:"RegTime"` //玩家注册时间
+}
