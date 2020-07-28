@@ -328,7 +328,7 @@ func (mgr *MailManager) RefreshUserMail(uid int64,regTime int64) []*MailFlag {
 		id, _ := strconv.ParseInt(strId, 10, 64)
 		mail := mgr.getMail(id)
 		if mail == nil {
-			//mgr.redisClient.SRem(REDIS_MAIL_GLOBAL,strId) //查无此邮删 避免玩家数据错误获取该邮件   优化3
+			mgr.redisClient.SRem(REDIS_MAIL_GLOBAL,strId) //查无此邮删 避免玩家数据错误获取该邮件   优化3
 			continue
 		}
 		if mgr.isExistUserMailFlag( mail,uid, regTime, mailFlags ) == true{
@@ -344,7 +344,7 @@ func (mgr *MailManager) RefreshUserMail(uid int64,regTime int64) []*MailFlag {
 		id, _ := strconv.ParseInt(strId, 10, 64)
 		mail := mgr.getMail(id)
 		if mail == nil {
-			//mgr.redisClient.SRem(REDIS_MAIL_TARGET+strUid,strId)//查无此邮删 避免玩家数据错误获取该邮件   优化4
+			mgr.redisClient.SRem(REDIS_MAIL_TARGET+strUid,strId)//查无此邮删 避免玩家数据错误获取该邮件   优化4
 			continue
 		}
 		if mgr.isExistUserMailFlag( mail,uid, regTime, mailFlags ) == true{
