@@ -35,6 +35,7 @@ const (
 	LogTypeDrawCard        //抽卡
 	LogTypeOrder           //订单信息 wjl 20200415
 	LogTypeBenefit         //福利活动（广告/道具）
+	LogTypeGift            //礼包码领取  vv  20200724
 )
 
 type LogDB struct {
@@ -283,6 +284,21 @@ func (l *LogManager) Write(opType int32, args ...interface{}) {
 			CostType:      args[3].(int32),
 			BenefitId:     args[4].(int32),
 			ChannelId:     args[5].(int32),
+		}
+		log.Data = []byte(tools.MarshalObj(data))
+	case LogTypeGift:
+		log.LogName = "giftCode"
+		data := &def.LogGift{
+			Time:      t,
+			UserID:    args[0].(int64),
+			Code:      args[1].(string),
+			Tag:       args[2].(int),
+			TimeBegin: args[3].(int64),
+			TimeEnd:   args[4].(int64),
+			Gift:      args[5].(string),
+			RecvTop:   args[6].(int),
+			RecvNum:   args[7].(int),
+			RegTime:   args[8].(int64),
 		}
 		log.Data = []byte(tools.MarshalObj(data))
 	default:
